@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173A63">
+<title>Brasileirão da Fluência — CVS 2026</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f4f7fb;font-family:Arial,Helvetica,sans-serif}
+#app{position:fixed;inset:0;width:100%;height:100%;border:0;background:#fff}
+#bridgeStatus{position:fixed;right:10px;top:10px;z-index:999999;padding:7px 10px;border-radius:999px;background:rgba(23,58,99,.94);color:#fff;font-size:12px;font-weight:700;box-shadow:0 2px 10px rgba(0,0,0,.18);pointer-events:none}
+#bridgeStatus.rec{background:#9d1c1c} #bridgeStatus.ok{background:#137a43} #bridgeStatus.warn{background:#805b00}
+</style>
+</head>
+<body>
+<div id="bridgeStatus">🎙️ Áudio pronto</div>
+<iframe id="app" title="Brasileirão da Fluência CVS 2026" allow="microphone"></iframe>
+<script>
+const DEFAULT_APP_URL='https://script.google.com/macros/s/AKfycbw00oxHsAyvp5V_wpjWgJblDqTpibx_h0IZ4SeH8Pfj3PLurJDATMQKGsQZZ3PzR5oF/exec';
+const qs=new URLSearchParams(location.search);
+const appUrl=qs.get('app')||DEFAULT_APP_URL;
+const frame=document.getElementById('app');
+frame.src=appUrl+(appUrl.includes('?')?'&':'?')+'embed=1';
+const badge=document.getElementById('bridgeStatus');
+let recorder=null,stream=null,chunks=[],mimeType='';
+function badgeSet(text,kind=''){badge.textContent=text;badge.className=kind;}
+function reply(req,data={}){
+  if(!frame.contentWindow)return;
+  frame.contentWindow.postMessage(Object.assign({channel:'CVS_FLUENCIA_AUDIO',requestId:req.requestId,ok:true},data),'*');
+}
+function fail(req,err){
+  const msg=(err&&err.message)?err.message:String(err||'Falha no microfone.');
+  frame.contentWindow.postMessage({channel:'CVS_FLUENCIA_AUDIO',requestId:req.requestId,ok:false,error:msg},'*');
+}
+function stopTracks(){if(stream){try{stream.getTracks().forEach(t=>t.stop())}catch(e){}stream=null;}}
+function resetRecorder(){
+  try{if(recorder&&recorder.state==='recording')recorder.stop()}catch(e){}
+  recorder=null; chunks=[]; mimeType=''; stopTracks(); badgeSet('🎙️ Áudio pronto');
+}
+function chooseMime(){
+  const candidates=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'];
+  return candidates.find(x=>{try{return MediaRecorder.isTypeSupported(x)}catch(e){return false}})||'';
+}
+async function startRecording(req){
+  try{
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||typeof MediaRecorder==='undefined')throw new Error('Este navegador não oferece gravação de áudio compatível.');
+    if(recorder&&recorder.state==='recording'){try{recorder.stop()}catch(e){}}
+    stopTracks(); chunks=[];
+    badgeSet('🎙️ Solicitando microfone…','warn');
+    stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true}});
+    mimeType=chooseMime();
+    recorder=mimeType?new MediaRecorder(stream,{mimeType}):new MediaRecorder(stream);
+    chunks=[];
+    recorder.ondataavailable=e=>{if(e.data&&e.data.size>0)chunks.push(e.data)};
+    recorder.onerror=()=>badgeSet('⚠️ Falha no áudio','warn');
+    recorder.start(250);
+    mimeType=recorder.mimeType||mimeType||'audio/webm';
+    badgeSet('🔴 GRAVANDO','rec');
+    reply(req,{mimeType});
+  }catch(e){
+    stopTracks(); recorder=null; badgeSet('⚠️ Microfone indisponível','warn'); fail(req,e);
+  }
+}
+function blobToBase64(blob){return new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>{const v=String(fr.result||'');resolve(v.includes(',')?v.split(',')[1]:v)};fr.onerror=()=>reject(new Error('Falha ao preparar o áudio.'));fr.readAsDataURL(blob);})}
+async function stopRecording(req){
+  try{
+    if(!recorder||recorder.state==='inactive'){stopTracks();badgeSet('⚠️ Sem áudio capturado','warn');reply(req,{base64:'',mimeType:mimeType||'audio/webm',size:0});return;}
+    badgeSet('🎙️ Finalizando…','warn');
+    const active=recorder;
+    const blob=await new Promise(resolve=>{
+      let done=false;
+      const finish=()=>{if(done)return;done=true;let b=null;try{b=chunks.length?new Blob(chunks,{type:active.mimeType||mimeType||'audio/webm'}):null}catch(e){b=null}resolve(b)};
+      active.addEventListener('stop',finish,{once:true});
+      try{active.stop()}catch(e){finish()}
+      setTimeout(finish,2500);
+    });
+    stopTracks(); recorder=null;
+    if(!blob||!blob.size){badgeSet('⚠️ Sem áudio capturado','warn');reply(req,{base64:'',mimeType:mimeType||'audio/webm',size:0});return;}
+    const base64=await blobToBase64(blob);
+    badgeSet('✅ Áudio capturado','ok');
+    reply(req,{base64,mimeType:blob.type||mimeType||'audio/webm',size:blob.size});
+  }catch(e){stopTracks();recorder=null;badgeSet('⚠️ Falha ao finalizar','warn');fail(req,e)}
+}
+window.addEventListener('message',ev=>{
+  if(ev.source!==frame.contentWindow)return;
+  const m=ev.data||{};
+  if(m.channel!=='CVS_FLUENCIA_AUDIO')return;
+  if(m.type==='START')startRecording(m);
+  else if(m.type==='STOP')stopRecording(m);
+  else if(m.type==='CANCEL'){resetRecorder();reply(m,{cancelled:true})}
+});
+window.addEventListener('beforeunload',stopTracks);
+</script>
+</body>
+</html>

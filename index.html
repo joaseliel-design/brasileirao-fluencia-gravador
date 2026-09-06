@@ -24,13 +24,15 @@ frame.src=appUrl+(appUrl.includes('?')?'&':'?')+'embed=1';
 const badge=document.getElementById('bridgeStatus');
 let recorder=null,stream=null,chunks=[],mimeType='';
 function badgeSet(text,kind=''){badge.textContent=text;badge.className=kind;}
-function reply(req,data={}){
-  if(!frame.contentWindow)return;
-  frame.contentWindow.postMessage(Object.assign({channel:'CVS_FLUENCIA_AUDIO',requestId:req.requestId,ok:true},data),'*');
+function reply(req,data={},target){
+  const dest=target||frame.contentWindow;
+  if(!dest)return;
+  dest.postMessage(Object.assign({channel:'CVS_FLUENCIA_AUDIO',requestId:req.requestId,ok:true},data),'*');
 }
-function fail(req,err){
+function fail(req,err,target){
   const msg=(err&&err.message)?err.message:String(err||'Falha no microfone.');
-  frame.contentWindow.postMessage({channel:'CVS_FLUENCIA_AUDIO',requestId:req.requestId,ok:false,error:msg},'*');
+  const dest=target||frame.contentWindow;
+  if(dest)dest.postMessage({channel:'CVS_FLUENCIA_AUDIO',requestId:req.requestId,ok:false,error:msg},'*');
 }
 function stopTracks(){if(stream){try{stream.getTracks().forEach(t=>t.stop())}catch(e){}stream=null;}}
 function resetRecorder(){
@@ -41,7 +43,7 @@ function chooseMime(){
   const candidates=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'];
   return candidates.find(x=>{try{return MediaRecorder.isTypeSupported(x)}catch(e){return false}})||'';
 }
-async function startRecording(req){
+async function startRecording(req,target){
   try{
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||typeof MediaRecorder==='undefined')throw new Error('Este navegador não oferece gravação de áudio compatível.');
     if(recorder&&recorder.state==='recording'){try{recorder.stop()}catch(e){}}
@@ -56,15 +58,15 @@ async function startRecording(req){
     recorder.start(250);
     mimeType=recorder.mimeType||mimeType||'audio/webm';
     badgeSet('🔴 GRAVANDO','rec');
-    reply(req,{mimeType});
+    reply(req,{mimeType},target);
   }catch(e){
-    stopTracks(); recorder=null; badgeSet('⚠️ Microfone indisponível','warn'); fail(req,e);
+    stopTracks(); recorder=null; badgeSet('⚠️ Microfone indisponível','warn'); fail(req,e,target);
   }
 }
 function blobToBase64(blob){return new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>{const v=String(fr.result||'');resolve(v.includes(',')?v.split(',')[1]:v)};fr.onerror=()=>reject(new Error('Falha ao preparar o áudio.'));fr.readAsDataURL(blob);})}
-async function stopRecording(req){
+async function stopRecording(req,target){
   try{
-    if(!recorder||recorder.state==='inactive'){stopTracks();badgeSet('⚠️ Sem áudio capturado','warn');reply(req,{base64:'',mimeType:mimeType||'audio/webm',size:0});return;}
+    if(!recorder||recorder.state==='inactive'){stopTracks();badgeSet('⚠️ Sem áudio capturado','warn');reply(req,{base64:'',mimeType:mimeType||'audio/webm',size:0},target);return;}
     badgeSet('🎙️ Finalizando…','warn');
     const active=recorder;
     const blob=await new Promise(resolve=>{
@@ -75,19 +77,19 @@ async function stopRecording(req){
       setTimeout(finish,2500);
     });
     stopTracks(); recorder=null;
-    if(!blob||!blob.size){badgeSet('⚠️ Sem áudio capturado','warn');reply(req,{base64:'',mimeType:mimeType||'audio/webm',size:0});return;}
+    if(!blob||!blob.size){badgeSet('⚠️ Sem áudio capturado','warn');reply(req,{base64:'',mimeType:mimeType||'audio/webm',size:0},target);return;}
     const base64=await blobToBase64(blob);
     badgeSet('✅ Áudio capturado','ok');
-    reply(req,{base64,mimeType:blob.type||mimeType||'audio/webm',size:blob.size});
-  }catch(e){stopTracks();recorder=null;badgeSet('⚠️ Falha ao finalizar','warn');fail(req,e)}
+    reply(req,{base64,mimeType:blob.type||mimeType||'audio/webm',size:blob.size},target);
+  }catch(e){stopTracks();recorder=null;badgeSet('⚠️ Falha ao finalizar','warn');fail(req,e,target)}
 }
 window.addEventListener('message',ev=>{
-  if(ev.source!==frame.contentWindow)return;
   const m=ev.data||{};
   if(m.channel!=='CVS_FLUENCIA_AUDIO')return;
-  if(m.type==='START')startRecording(m);
-  else if(m.type==='STOP')stopRecording(m);
-  else if(m.type==='CANCEL'){resetRecorder();reply(m,{cancelled:true})}
+  const source=ev.source;
+  if(m.type==='START')startRecording(m,source);
+  else if(m.type==='STOP')stopRecording(m,source);
+  else if(m.type==='CANCEL'){resetRecorder();reply(m,{cancelled:true},source)}
 });
 window.addEventListener('beforeunload',stopTracks);
 </script>

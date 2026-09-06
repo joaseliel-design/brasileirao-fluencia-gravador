@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Teste de microfone — Brasileirão da Fluência</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f4f7fb;color:#173A63;padding:24px}
+.card{max-width:620px;margin:0 auto;background:#fff;border-radius:18px;padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.10)}
+h1{font-size:24px;margin:0 0 8px}.sub{color:#52647a;margin-bottom:20px}.btn{width:100%;border:0;border-radius:14px;padding:16px;font-size:18px;font-weight:700;background:#173A63;color:#fff}.btn:disabled{opacity:.55}.status{margin:18px 0;padding:14px;border-radius:12px;background:#eef3f8;font-weight:700}.ok{background:#e9f7ef;color:#17603a}.warn{background:#fff4d8;color:#775600}.err{background:#fdeaea;color:#8d1d1d}.diag{font-family:monospace;font-size:13px;white-space:pre-wrap;background:#f7f7f7;padding:12px;border-radius:10px;color:#333;margin-top:16px}audio{width:100%;margin-top:16px}.small{font-size:13px;color:#68788a;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>Teste de microfone</h1>
+<div class="sub">Sem Apps Script, sem alunos e sem ranking. Este teste isola apenas o microfone do celular.</div>
+<button id="testBtn" class="btn">🎙️ TESTAR MICROFONE — 5 SEGUNDOS</button>
+<div id="status" class="status">Pronto para testar.</div>
+<audio id="player" controls hidden></audio>
+<div id="diag" class="diag"></div>
+<div class="small">Ao tocar no botão, permita o acesso ao microfone. O teste grava por 5 segundos e depois libera a reprodução do áudio.</div>
+</div>
+<script>
+const btn=document.getElementById('testBtn');
+const statusEl=document.getElementById('status');
+const player=document.getElementById('player');
+const diag=document.getElementById('diag');
+let stream=null,recorder=null,chunks=[];
+function setStatus(text,kind=''){statusEl.textContent=text;statusEl.className='status '+kind;}
+function diagnostics(extra=''){
+  const lines=[
+    'HTTPS/secureContext: '+window.isSecureContext,
+    'mediaDevices: '+!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia),
+    'MediaRecorder: '+(typeof MediaRecorder!=='undefined'),
+    'userAgent: '+navigator.userAgent
+  ];
+  if(extra)lines.push(extra);
+  diag.textContent=lines.join('\n');
+}
+function stopTracks(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}}
+async function runTest(){
+  btn.disabled=true; player.hidden=true; player.removeAttribute('src'); chunks=[]; diagnostics();
+  try{
+    if(!window.isSecureContext)throw new Error('A página não está em contexto HTTPS seguro.');
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('getUserMedia não está disponível neste navegador.');
+    if(typeof MediaRecorder==='undefined')throw new Error('MediaRecorder não está disponível neste navegador.');
+    setStatus('Solicitando acesso ao microfone…','warn');
+    stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    setStatus('🔴 GRAVANDO — fale qualquer coisa por 5 segundos','warn');
+    const candidates=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'];
+    const mime=candidates.find(x=>{try{return MediaRecorder.isTypeSupported(x)}catch(e){return false}})||'';
+    recorder=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream);
+    recorder.ondataavailable=e=>{if(e.data&&e.data.size>0)chunks.push(e.data)};
+    const stopped=new Promise((resolve,reject)=>{
+      recorder.onstop=resolve;
+      recorder.onerror=e=>reject(e.error||new Error('Erro do MediaRecorder'));
+    });
+    recorder.start(250);
+    await new Promise(r=>setTimeout(r,5000));
+    recorder.stop();
+    await stopped;
+    stopTracks();
+    const blob=new Blob(chunks,{type:recorder.mimeType||mime||'audio/webm'});
+    if(!blob.size)throw new Error('A gravação terminou sem dados de áudio.');
+    const url=URL.createObjectURL(blob);
+    player.src=url; player.hidden=false;
+    setStatus('✅ MICROFONE FUNCIONOU — toque no player abaixo para ouvir.','ok');
+    diagnostics('mimeType: '+blob.type+'\ntamanho: '+blob.size+' bytes');
+  }catch(e){
+    stopTracks();
+    const name=e&&e.name?e.name:'Erro';
+    const msg=e&&e.message?e.message:String(e);
+    setStatus('❌ '+name+': '+msg,'err');
+    diagnostics('erro: '+name+' — '+msg);
+  }finally{btn.disabled=false;}
+}
+diagnostics();
+btn.addEventListener('click',runTest);
+</script>
+</body>
+</html>

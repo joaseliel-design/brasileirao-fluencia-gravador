@@ -13,7 +13,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f4f7fb;fon
 </style>
 </head>
 <body>
-<div id="bridgeStatus">🎙️ Áudio pronto</div>
+<div id="bridgeStatus">🎙️ Áudio pronto • ponte 0.6.6</div>
 <iframe id="app" title="Brasileirão da Fluência CVS 2026" allow="microphone"></iframe>
 <script>
 const DEFAULT_APP_URL='https://script.google.com/macros/s/AKfycbwfBzYXfZiShm-AL7jzqe7KX570_oB1D5w3XWcXnMtyEDrPJzzEf4kFFq5BKQaMS7wu/exec';
@@ -22,76 +22,125 @@ const appUrl=qs.get('app')||DEFAULT_APP_URL;
 const frame=document.getElementById('app');
 frame.src=appUrl+(appUrl.includes('?')?'&':'?')+'embed=1';
 const badge=document.getElementById('bridgeStatus');
-let recorder=null,stream=null,chunks=[],mimeType='';
+let activeSession=null;
+let lastCapture=null;
+const requests=new Map();
 function badgeSet(text,kind=''){badge.textContent=text;badge.className=kind;}
-function reply(req,data={},target){
-  const dest=target||frame.contentWindow;
-  if(!dest)return;
-  dest.postMessage(Object.assign({channel:'CVS_FLUENCIA_AUDIO',requestId:req.requestId,ok:true},data),'*');
-}
-function fail(req,err,target){
-  const msg=(err&&err.message)?err.message:String(err||'Falha no microfone.');
-  const dest=target||frame.contentWindow;
-  if(dest)dest.postMessage({channel:'CVS_FLUENCIA_AUDIO',requestId:req.requestId,ok:false,error:msg},'*');
-}
-function stopTracks(){if(stream){try{stream.getTracks().forEach(t=>t.stop())}catch(e){}stream=null;}}
-function resetRecorder(){
-  try{if(recorder&&recorder.state==='recording')recorder.stop()}catch(e){}
-  recorder=null; chunks=[]; mimeType=''; stopTracks(); badgeSet('🎙️ Áudio pronto');
-}
+function stopTracks(s){if(s){try{s.getTracks().forEach(t=>t.stop())}catch(e){}}}
 function chooseMime(){
   const candidates=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'];
   return candidates.find(x=>{try{return MediaRecorder.isTypeSupported(x)}catch(e){return false}})||'';
 }
-async function startRecording(req,target){
-  try{
-    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||typeof MediaRecorder==='undefined')throw new Error('Este navegador não oferece gravação de áudio compatível.');
-    if(recorder&&recorder.state==='recording'){try{recorder.stop()}catch(e){}}
-    stopTracks(); chunks=[];
-    badgeSet('🎙️ Solicitando microfone…','warn');
-    stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true}});
-    mimeType=chooseMime();
-    recorder=mimeType?new MediaRecorder(stream,{mimeType}):new MediaRecorder(stream);
-    chunks=[];
-    recorder.ondataavailable=e=>{if(e.data&&e.data.size>0)chunks.push(e.data)};
-    recorder.onerror=()=>badgeSet('⚠️ Falha no áudio','warn');
-    recorder.start(250);
-    mimeType=recorder.mimeType||mimeType||'audio/webm';
-    badgeSet('🔴 GRAVANDO','rec');
-    reply(req,{mimeType},target);
-  }catch(e){
-    stopTracks(); recorder=null; badgeSet('⚠️ Microfone indisponível','warn'); fail(req,e,target);
-  }
-}
 function blobToBase64(blob){return new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>{const v=String(fr.result||'');resolve(v.includes(',')?v.split(',')[1]:v)};fr.onerror=()=>reject(new Error('Falha ao preparar o áudio.'));fr.readAsDataURL(blob);})}
-async function stopRecording(req,target){
-  try{
-    if(!recorder||recorder.state==='inactive'){stopTracks();badgeSet('⚠️ Sem áudio capturado','warn');reply(req,{base64:'',mimeType:mimeType||'audio/webm',size:0},target);return;}
-    badgeSet('🎙️ Finalizando…','warn');
-    const active=recorder;
-    const blob=await new Promise(resolve=>{
+function send(target,req,result){
+  if(!target)return;
+  try{target.postMessage(Object.assign({channel:'CVS_FLUENCIA_AUDIO',requestId:req.requestId},result),'*')}catch(e){}
+}
+function sendAll(entry,result){
+  entry.targets.forEach(t=>send(t,entry.req,result));
+  entry.result=result;
+}
+function cleanupRequests(){
+  const now=Date.now();
+  for(const [id,e] of requests){if(e.doneAt&&now-e.doneAt>60000)requests.delete(id)}
+}
+async function cancelActive(){
+  const s=activeSession;
+  activeSession=null;
+  if(!s)return;
+  try{if(s.recorder&&s.recorder.state!=='inactive')s.recorder.stop()}catch(e){}
+  stopTracks(s.stream);
+}
+async function handleStart(req){
+  await cancelActive();
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||typeof MediaRecorder==='undefined')throw new Error('Este navegador não oferece gravação de áudio compatível.');
+  badgeSet('🎙️ Solicitando microfone…','warn');
+  const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true}});
+  const preferred=chooseMime();
+  const recorder=preferred?new MediaRecorder(stream,{mimeType:preferred}):new MediaRecorder(stream);
+  const chunks=[];
+  recorder.ondataavailable=e=>{if(e.data&&e.data.size>0)chunks.push(e.data)};
+  recorder.onerror=()=>badgeSet('⚠️ Falha no áudio','warn');
+  recorder.start(250);
+  activeSession={recorder,stream,chunks,mimeType:recorder.mimeType||preferred||'audio/webm',startedAt:Date.now()};
+  lastCapture=null;
+  badgeSet('🔴 GRAVANDO','rec');
+  return {ok:true,mimeType:activeSession.mimeType};
+}
+async function finalizeSession(){
+  const s=activeSession;
+  if(!s){
+    if(lastCapture&&Date.now()-lastCapture.at<15000)return lastCapture.result;
+    return {ok:true,base64:'',mimeType:'audio/webm',size:0};
+  }
+  activeSession=null;
+  badgeSet('🎙️ Finalizando…','warn');
+  const rec=s.recorder;
+  if(rec.state!=='inactive'){
+    try{if(typeof rec.requestData==='function')rec.requestData()}catch(e){}
+    await new Promise(resolve=>{
       let done=false;
-      const finish=()=>{if(done)return;done=true;let b=null;try{b=chunks.length?new Blob(chunks,{type:active.mimeType||mimeType||'audio/webm'}):null}catch(e){b=null}resolve(b)};
-      active.addEventListener('stop',finish,{once:true});
-      try{active.stop()}catch(e){finish()}
-      setTimeout(finish,2500);
+      const finish=()=>{if(done)return;done=true;resolve()};
+      rec.addEventListener('stop',finish,{once:true});
+      try{rec.stop()}catch(e){finish()}
+      setTimeout(finish,3500);
     });
-    stopTracks(); recorder=null;
-    if(!blob||!blob.size){badgeSet('⚠️ Sem áudio capturado','warn');reply(req,{base64:'',mimeType:mimeType||'audio/webm',size:0},target);return;}
-    const base64=await blobToBase64(blob);
-    badgeSet('✅ Áudio capturado','ok');
-    reply(req,{base64,mimeType:blob.type||mimeType||'audio/webm',size:blob.size},target);
-  }catch(e){stopTracks();recorder=null;badgeSet('⚠️ Falha ao finalizar','warn');fail(req,e,target)}
+  }
+  await new Promise(r=>setTimeout(r,60));
+  stopTracks(s.stream);
+  const blob=s.chunks.length?new Blob(s.chunks,{type:s.mimeType||'audio/webm'}):null;
+  if(!blob||!blob.size){
+    const empty={ok:true,base64:'',mimeType:s.mimeType||'audio/webm',size:0};
+    lastCapture={at:Date.now(),result:empty};
+    badgeSet('⚠️ Sem áudio capturado','warn');
+    return empty;
+  }
+  const base64=await blobToBase64(blob);
+  const result={ok:true,base64,mimeType:blob.type||s.mimeType||'audio/webm',size:blob.size};
+  lastCapture={at:Date.now(),result};
+  badgeSet('✅ Áudio capturado • '+Math.max(1,Math.round(blob.size/1024))+' KB','ok');
+  return result;
+}
+async function handleCancel(){
+  await cancelActive();
+  lastCapture=null;
+  badgeSet('🎙️ Áudio pronto • ponte 0.6.6');
+  return {ok:true,cancelled:true};
+}
+function processRequest(req,target){
+  cleanupRequests();
+  const id=String(req.requestId||'');
+  if(!id)return;
+  let entry=requests.get(id);
+  if(entry){
+    if(!entry.targets.includes(target))entry.targets.push(target);
+    if(entry.result)send(target,req,entry.result);
+    return;
+  }
+  entry={req,targets:[target],result:null,doneAt:0};
+  requests.set(id,entry);
+  (async()=>{
+    try{
+      let result;
+      if(req.type==='START')result=await handleStart(req);
+      else if(req.type==='STOP')result=await finalizeSession();
+      else if(req.type==='CANCEL')result=await handleCancel();
+      else return;
+      sendAll(entry,result);
+    }catch(e){
+      const result={ok:false,error:(e&&e.message)?e.message:String(e||'Falha no gravador externo.')};
+      sendAll(entry,result);
+      badgeSet('⚠️ '+result.error,'warn');
+    }finally{entry.doneAt=Date.now()}
+  })();
 }
 window.addEventListener('message',ev=>{
   const m=ev.data||{};
   if(m.channel!=='CVS_FLUENCIA_AUDIO')return;
-  const source=ev.source;
-  if(m.type==='START')startRecording(m,source);
-  else if(m.type==='STOP')stopRecording(m,source);
-  else if(m.type==='CANCEL'){resetRecorder();reply(m,{cancelled:true},source)}
+  if(!['START','STOP','CANCEL'].includes(m.type))return;
+  processRequest(m,ev.source);
 });
-window.addEventListener('beforeunload',stopTracks);
+window.addEventListener('beforeunload',()=>{if(activeSession)stopTracks(activeSession.stream)});
 </script>
 </body>
 </html>

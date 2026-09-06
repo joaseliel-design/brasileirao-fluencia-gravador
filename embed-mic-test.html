@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Teste com app aberto — Brasileirão da Fluência</title>
+<style>
+html,body{margin:0;height:100%;font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#173A63}
+.wrap{height:100%;display:grid;grid-template-rows:auto 1fr}.top{padding:12px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);z-index:2}.top h1{font-size:18px;margin:0 0 8px}.row{display:flex;gap:8px;align-items:center}.btn{border:0;border-radius:10px;padding:11px 14px;font-weight:700;background:#173A63;color:#fff}.status{font-size:13px;font-weight:700}.ok{color:#17603a}.warn{color:#8a6300}.err{color:#8d1d1d}iframe{width:100%;height:100%;border:0;background:#fff}audio{width:100%;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>Teste do microfone com o app aberto abaixo</h1>
+    <div class="row">
+      <button id="btn" class="btn">🎙️ GRAVAR 5s</button>
+      <span id="st" class="status">Pronto.</span>
+    </div>
+    <audio id="player" controls hidden></audio>
+  </div>
+  <iframe id="app" allow="microphone" title="App de teste"></iframe>
+</div>
+<script>
+const APP='https://script.google.com/macros/s/AKfycbwfBzYXfZiShm-AL7jzqe7KX570_oB1D5w3XWcXnMtyEDrPJzzEf4kFFq5BKQaMS7wu/exec';
+document.getElementById('app').src=APP+'?embed=1';
+const btn=document.getElementById('btn'),st=document.getElementById('st'),player=document.getElementById('player');
+let stream=null,rec=null,chunks=[];
+function status(t,c=''){st.textContent=t;st.className='status '+c}
+function stopTracks(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}}
+btn.onclick=async()=>{
+  btn.disabled=true;player.hidden=true;chunks=[];
+  try{
+    status('Solicitando microfone…','warn');
+    stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    const cand=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'];
+    const mime=cand.find(x=>{try{return MediaRecorder.isTypeSupported(x)}catch(e){return false}})||'';
+    rec=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream);
+    rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
+    const stopped=new Promise((res,rej)=>{rec.onstop=res;rec.onerror=e=>rej(e.error||new Error('Erro de gravação'))});
+    rec.start(250); status('🔴 Gravando 5 segundos…','warn');
+    await new Promise(r=>setTimeout(r,5000));
+    rec.stop(); await stopped; stopTracks();
+    const blob=new Blob(chunks,{type:rec.mimeType||mime||'audio/webm'});
+    if(!blob.size)throw new Error('Sem dados de áudio.');
+    player.src=URL.createObjectURL(blob);player.hidden=false;
+    status('✅ Funcionou com o app aberto.','ok');
+  }catch(e){stopTracks();status('❌ '+(e.name||'Erro')+': '+(e.message||e),'err')}
+  finally{btn.disabled=false}
+};
+</script>
+</body>
+</html>

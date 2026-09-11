@@ -26,6 +26,43 @@ def norm(text):
     s = s.replace("’", "").replace("'", "")
     return re.sub(r"[^a-z0-9-]", "", s)
 
+def merge_observed_compounds(raw_canon, timed_words):
+    """Merge adjacent ASR tokens when they exactly form a hyphenated canonical word.
+    Example: canonical 'segunda-feira' and ASR ['segunda', 'feira'] become one observed token.
+    This preserves the official word count while avoiding a false precision error.
+    """
+    compound_parts = []
+    for tok in raw_canon:
+        if "-" in tok:
+            parts = [norm(p) for p in tok.split("-") if norm(p)]
+            if len(parts) >= 2:
+                compound_parts.append((parts, tok))
+
+    if not compound_parts:
+        return timed_words
+
+    out = []
+    i = 0
+    while i < len(timed_words):
+        matched = False
+        for parts, canonical_tok in compound_parts:
+            n = len(parts)
+            if i + n <= len(timed_words):
+                obs_parts = [norm(timed_words[i+j]["text"]) for j in range(n)]
+                if obs_parts == parts:
+                    out.append({
+                        "text": canonical_tok,
+                        "start": timed_words[i].get("start"),
+                        "end": timed_words[i+n-1].get("end"),
+                    })
+                    i += n
+                    matched = True
+                    break
+        if not matched:
+            out.append(timed_words[i])
+            i += 1
+    return out
+
 def align(canon, obs):
     n, m = len(canon), len(obs)
     dp = [[0]*(m+1) for _ in range(n+1)]
@@ -170,6 +207,7 @@ def process_job(model, job):
         raise RuntimeError("Whisper returned no usable words")
 
     raw_canon = tokens(job["canonical_text"])
+    timed_words = merge_observed_compounds(raw_canon, timed_words)
     raw_obs = [w["text"] for w in timed_words]
     canon_n = [norm(x) for x in raw_canon]
     obs_n = [norm(x) for x in raw_obs]

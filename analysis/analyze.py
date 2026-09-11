@@ -1,6 +1,8 @@
-import os, re, json, base64, tempfile, unicodedata, difflib
+import os, re, json, base64, tempfile, unicodedata, difflib, subprocess, math
 from pathlib import Path
 import requests
+import numpy as np
+import parselmouth
 from faster_whisper import WhisperModel
 
 BRIDGE_URL = os.environ["BRIDGE_URL"].strip()
@@ -267,6 +269,229 @@ def rhythm_score(ops, timed_words, canonical_text, counts):
         "regra_duracao_interna": "NAO_PENALIZA_DIRETAMENTE",
     }
 
+
+def prosody_score(job, ops, timed_words, canonical_text):
+    """Prosódia automática oficial v1 (0–100).
+
+    Estrutura:
+      - Pontuação e pausas: 40
+      - Entonação: 35
+      - Fraseamento / sentido: 25
+
+    Regra pedagógica:
+      Se o áudio é tecnicamente utilizável e a criança não realiza marcação
+      prosódica, isso reduz a nota. Só falha real de captura/áudio é tratada
+      como erro técnico.
+    """
+    marks = canonical_marks(canonical_text)
+    obs_to_canon = {}
+    for op in ops:
+        if op.get("oj") is not None and op.get("ci") is not None:
+            obs_to_canon[op["oj"]] = op["ci"]
+
+    punctuation_total = sum(
+        1 for mark in marks
+        if re.search(r"[.!?;:]", mark) or "," in mark
+    )
+    punctuation_valid = 0
+    meaningful_pauses = 0
+    located_pauses = 0
+    strong_boundaries = []
+
+    for j in range(len(timed_words) - 1):
+        end = timed_words[j].get("end")
+        start_next = timed_words[j+1].get("start")
+        if end is None or start_next is None:
+            continue
+
+        end = float(end)
+        start_next = float(start_next)
+        gap = max(0.0, start_next - end)
+
+        ci = obs_to_canon.get(j)
+        mark = marks[ci] if ci is not None and ci < len(marks) else ""
+        is_strong = bool(re.search(r"[.!?;:]", mark))
+        is_comma = "," in mark
+
+        if is_strong:
+            if 0.15 <= gap <= 1.50:
+                punctuation_valid += 1
+                strong_boundaries.append(end)
+        elif is_comma:
+            if 0.08 <= gap <= 1.00:
+                punctuation_valid += 1
+
+        if gap >= 0.25:
+            meaningful_pauses += 1
+            if is_strong or is_comma:
+                located_pauses += 1
+
+    punctuation = (
+        40.0 * punctuation_valid / punctuation_total
+        if punctuation_total > 0 else 0.0
+    )
+
+    phrasing = (
+        25.0 * located_pauses / meaningful_pauses
+        if meaningful_pauses > 0 else 0.0
+    )
+
+    audio = base64.b64decode(job["audio_b64"])
+    mime = (job.get("audio_mime") or "").lower()
+    suffix = ".webm"
+    if "wav" in mime:
+        suffix = ".wav"
+    elif "mpeg" in mime or "mp3" in mime:
+        suffix = ".mp3"
+    elif "mp4" in mime:
+        suffix = ".mp4"
+    elif "ogg" in mime:
+        suffix = ".ogg"
+
+    src_path = None
+    wav_path = None
+    try:
+        with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as f:
+            f.write(audio)
+            src_path = f.name
+
+        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as wf:
+            wav_path = wf.name
+
+        subprocess.run(
+            [
+                "ffmpeg", "-y", "-loglevel", "error",
+                "-i", src_path,
+                "-ac", "1", "-ar", "16000",
+                wav_path,
+            ],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+
+        snd = parselmouth.Sound(wav_path)
+        pitch = snd.to_pitch_ac(
+            time_step=0.01,
+            pitch_floor=75,
+            pitch_ceiling=600,
+        )
+        freqs = pitch.selected_array["frequency"].astype(float)
+        times = pitch.xs()
+        voiced = freqs[freqs > 0]
+
+        if len(voiced) < 3:
+            raise RuntimeError("Áudio sem frequência fundamental utilizável para prosódia.")
+
+        p10, p90 = np.percentile(voiced, [10, 90])
+        if p10 <= 0 or p90 <= 0:
+            raise RuntimeError("Áudio sem faixa tonal utilizável para prosódia.")
+
+        pitch_range_st = float(12.0 * np.log2(p90 / p10))
+
+        changes = []
+        for bt in strong_boundaries:
+            pre = freqs[
+                (times >= max(0.0, bt - 0.80))
+                & (times <= max(0.0, bt - 0.03))
+            ]
+            post = freqs[
+                (times >= bt + 0.03)
+                & (times <= bt + 0.80)
+            ]
+            pre = pre[pre > 0]
+            post = post[post > 0]
+
+            if len(pre) >= 3 and len(post) >= 3:
+                a = float(np.median(pre[-min(len(pre), 15):]))
+                b = float(np.median(post[:min(len(post), 15)]))
+                if a > 0 and b > 0:
+                    changes.append(abs(float(12.0 * np.log2(b / a))))
+
+        global_part = 15.0 * min(max(pitch_range_st, 0.0) / 6.0, 1.0)
+
+        if changes:
+            arr = np.array(changes, dtype=float)
+            share_075 = float(np.mean(arr >= 0.75))
+            median_change = float(np.median(arr))
+            boundary_part = (
+                10.0 * share_075
+                + 10.0 * min(max(median_change, 0.0) / 3.0, 1.0)
+            )
+        else:
+            share_075 = 0.0
+            median_change = 0.0
+            boundary_part = 0.0
+
+        intonation = min(35.0, global_part + boundary_part)
+        total = round(max(0.0, min(100.0, punctuation + intonation + phrasing)), 2)
+
+        return {
+            "status": "OFICIAL_V1_ACUSTICO",
+            "versao": "PROSODIA_AUTO_V1",
+            "motor_acustico": "Praat/Parselmouth",
+            "pontuacao_pausas": {
+                "nota": round(punctuation, 2),
+                "limite": 40,
+                "limites_canonicos": punctuation_total,
+                "limites_validos": punctuation_valid,
+                "boundary_valid_ratio": round(
+                    punctuation_valid / punctuation_total, 6
+                ) if punctuation_total else 0.0,
+                "regra": (
+                    "Limites canônicos: forte 0,15–1,50 s; "
+                    "vírgula 0,08–1,00 s"
+                ),
+            },
+            "entonacao": {
+                "nota": round(intonation, 2),
+                "limite": 35,
+                "pitch_range_p90_p10_semitons": round(pitch_range_st, 3),
+                "parte_variacao_global": round(global_part, 2),
+                "limites_fortes_acusticamente_validos": len(changes),
+                "share_mudanca_tonal_ge_0_75st": round(share_075, 3),
+                "mediana_mudanca_tonal_st": round(median_change, 3),
+                "parte_modulacao_limites": round(boundary_part, 2),
+                "regra": (
+                    "15 pts variação tonal global + 20 pts modulação tonal "
+                    "somente em limites fortes com pausa prosodicamente plausível"
+                ),
+            },
+            "fraseamento_significado": {
+                "nota": round(phrasing, 2),
+                "limite": 25,
+                "pausas_relevantes": meaningful_pauses,
+                "pausas_em_limites": located_pauses,
+                "pause_location_ratio": round(
+                    located_pauses / meaningful_pauses, 6
+                ) if meaningful_pauses else 0.0,
+                "regra": (
+                    "Pausas relevantes predominantemente em limites canônicos"
+                ),
+            },
+            "prosodia_pct": total,
+            "regra_sem_prosodia": (
+                "SE_AUDIO_TECNICAMENTE_VALIDO_AUSENCIA_DE_MARCACAO_"
+                "PROSODICA_REDUZ_A_NOTA"
+            ),
+            "regra_falha_tecnica": (
+                "REABRIR_SOMENTE_SE_AUDIO_INUTILIZAVEL_POR_FALHA_DE_CAPTURA"
+            ),
+            "homologacao": "OPERACIONAL_CVS_R1",
+        }
+
+    except subprocess.CalledProcessError as exc:
+        detail = (exc.stderr or b"").decode("utf-8", errors="ignore")[-500:]
+        raise RuntimeError("Falha ao preparar áudio para prosódia. " + detail)
+    finally:
+        for path in (src_path, wav_path):
+            if path:
+                try:
+                    os.unlink(path)
+                except OSError:
+                    pass
+
+
 def speed_from_alignment(ops, timed_words, duration, concluded, canonical_count):
     duration = float(duration or 0)
     if concluded and duration > 0 and duration <= 60:
@@ -370,6 +595,14 @@ def process_job(model, job):
     counts["precision_denominator"] = denominator
 
     rhythm = rhythm_score(ops, timed_words, job["canonical_text"], counts)
+    prosody = prosody_score(job, ops, timed_words, job["canonical_text"])
+
+    total_100 = round(max(0.0, min(100.0,
+        precision_official * 0.35
+        + prosody["prosodia_pct"] * 0.30
+        + rhythm["ritmo_pct"] * 0.20
+        + v_idx * 0.15
+    )), 2)
 
     return {
         "leitura_id": job["leitura_id"],
@@ -388,6 +621,10 @@ def process_job(model, job):
         "rhythm_pct": rhythm["ritmo_pct"],
         "rhythm_status": rhythm["status"],
         "rhythm_details": rhythm,
+        "prosody_pct": prosody["prosodia_pct"],
+        "prosody_status": prosody["status"],
+        "prosody_details": prosody,
+        "total_100": total_100,
     }
 
 def main():

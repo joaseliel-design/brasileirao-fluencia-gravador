@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-11T14:46:47Z",
+  "atualizado_em": "2026-09-11T14:56:00Z",
   "fonte": "seed_live_base",
   "categorias": [
     {
@@ -10,6 +10,7 @@
         {
           "posicao": 1,
           "nome": "ELIEL FILIPE DA SILVA VIEIRA",
+          "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true
@@ -17,6 +18,7 @@
         {
           "posicao": 2,
           "nome": "ISABELLA LIMA DE FRAGA",
+          "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true
@@ -24,6 +26,7 @@
         {
           "posicao": 3,
           "nome": "MARIA GABRIELA ROLDÃO GONÇALVES",
+          "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true
@@ -31,6 +34,7 @@
         {
           "posicao": 4,
           "nome": "LUNA VICTÓRIA GRANVILLE DE MATOS",
+          "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true
@@ -38,6 +42,7 @@
         {
           "posicao": 5,
           "nome": "MARIA HELENA CANUTO SANTOS",
+          "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true
@@ -45,6 +50,7 @@
         {
           "posicao": 6,
           "nome": "CAROLINA SANTOS GONÇALVES",
+          "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true
@@ -52,6 +58,7 @@
         {
           "posicao": 7,
           "nome": "RICARDO GARCIA PIETSCH",
+          "turma": "21",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false
@@ -59,6 +66,7 @@
         {
           "posicao": 8,
           "nome": "SOPHIA EMANUELY FERREIRA PINHEIRO",
+          "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false
@@ -66,6 +74,7 @@
         {
           "posicao": 9,
           "nome": "MATHEUS ENRIQUE DOS SANTOS DA SILVA",
+          "turma": "21",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false
@@ -73,6 +82,7 @@
         {
           "posicao": 10,
           "nome": "MIGUEL JOSEFINO DE MATOS",
+          "turma": "21",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false
@@ -80,6 +90,7 @@
         {
           "posicao": 11,
           "nome": "VALENTINA PRATES GOULART",
+          "turma": "21",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false
@@ -87,6 +98,7 @@
         {
           "posicao": 12,
           "nome": "DIOVANNA ANDRADE SANTOS",
+          "turma": "21",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false
@@ -94,6 +106,7 @@
         {
           "posicao": 13,
           "nome": "JAMILY MANUELA FONSECA DE SOUZA",
+          "turma": "21",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false
@@ -106,6 +119,7 @@
         {
           "posicao": 1,
           "nome": "ALICE FLORES DA SILVA",
+          "turma": "41",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true
@@ -113,6 +127,7 @@
         {
           "posicao": 2,
           "nome": "ANA LUISA SANTOS DE FRAGA",
+          "turma": "41",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true
@@ -120,6 +135,7 @@
         {
           "posicao": 3,
           "nome": "AMANDA PERES BRAZ DA SILVA",
+          "turma": "41",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true

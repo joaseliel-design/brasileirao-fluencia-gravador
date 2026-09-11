@@ -1,6 +1,9 @@
 name: Análise de Fluência — automática e manual
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       max_jobs:

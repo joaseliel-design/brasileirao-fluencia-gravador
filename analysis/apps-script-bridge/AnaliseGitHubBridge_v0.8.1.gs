@@ -1,5 +1,5 @@
 /**
- * BRASILEIRÃO DA FLUÊNCIA CVS 2026 — GitHub Bridge v0.8.1
+ * BRASILEIRÃO DA FLUÊNCIA CVS 2026 — GitHub Bridge v0.8.9
  *
  * Ponte privada entre o Apps Script e o GitHub Actions/Faster-Whisper.
  * Este módulo NÃO grava áudio no GitHub e NÃO publica dados de alunos.
@@ -116,7 +116,7 @@ function BF81_nextJob_() {
         Leitura_ID: leituraId,
         Estado: 'PROCESSANDO_GITHUB',
         Audio_File_ID: fileId,
-        Modelo_STT: 'faster-whisper/small',
+        Modelo_STT: 'faster-whisper/medium',
         Inicio_Analise: new Date(),
         Atualizado_em: new Date()
       });
@@ -154,15 +154,17 @@ function BF81_saveResult_(result) {
 
   BF81_upsert_(ss, {
     Leitura_ID: id,
-    Estado: 'ANALISADO_STT_TESTE',
+    Estado: 'ANALISADO_STT_RITMO',
     Modelo_STT: String(result.engine || 'faster-whisper'),
     Fim_Analise: new Date(),
     Transcricao: String(result.transcript || ''),
     Palavras_60s: result.words_60s === undefined ? '' : Number(result.words_60s),
     Velocidade_PPM_Apurada: result.ppm === undefined ? '' : Number(result.ppm),
-    Precisao_pct: result.precision_candidate_pct === undefined ? '' : Number(result.precision_candidate_pct),
+    Precisao_pct: result.precision_pct !== undefined
+      ? Number(result.precision_pct)
+      : (result.precision_candidate_pct === undefined ? '' : Number(result.precision_candidate_pct)),
     Prosodia_pct: '',
-    Ritmo_pct: '',
+    Ritmo_pct: result.rhythm_pct === undefined ? '' : Number(result.rhythm_pct),
     Total_100: '',
     Autocorrecoes: Number(counts.autocorrections || 0),
     Erros: erros,
@@ -173,11 +175,12 @@ function BF81_saveResult_(result) {
       events: result.events || [],
       words: result.words || []
     }),
+    Ritmo_JSON: result.rhythm_details ? JSON.stringify(result.rhythm_details) : '',
     Erro_Tecnico: '',
     Atualizado_em: new Date()
   });
 
-  return {ok:true, leitura_id:id, estado:'ANALISADO_STT_TESTE'};
+  return {ok:true, leitura_id:id, estado:'ANALISADO_STT_RITMO'};
 }
 
 function BF81_saveError_(leituraId, error) {

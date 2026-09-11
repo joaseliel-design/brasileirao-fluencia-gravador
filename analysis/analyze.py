@@ -242,7 +242,7 @@ def process_job(model, job):
 
 def main():
     print(f"Starting CVS fluency worker with model={MODEL_SIZE}, max_jobs={MAX_JOBS}")
-    model = WhisperModel(MODEL_SIZE, device="cpu", compute_type="int8")
+    model = WhisperModel(MODEL_SIZE, device="cpu", compute_type="int8", cpu_threads=1, num_workers=1)
     processed = 0
     while processed < MAX_JOBS:
         nxt = bridge("next")

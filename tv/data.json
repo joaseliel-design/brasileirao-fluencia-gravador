@@ -1,8 +1,8 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-11T14:56:00Z",
-  "fonte": "seed_live_base",
+  "atualizado_em": "2026-09-11T15:03:57Z",
+  "fonte": "base_central_live",
   "categorias": [
     {
       "categoria": 1,
@@ -33,7 +33,7 @@
         },
         {
           "posicao": 4,
-          "nome": "LUNA VICTÓRIA GRANVILLE DE MATOS",
+          "nome": "CAIO BOHMGAHREN VARGAS",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -41,7 +41,7 @@
         },
         {
           "posicao": 5,
-          "nome": "MARIA HELENA CANUTO SANTOS",
+          "nome": "LUNA VICTÓRIA GRANVILLE DE MATOS",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -49,7 +49,7 @@
         },
         {
           "posicao": 6,
-          "nome": "CAROLINA SANTOS GONÇALVES",
+          "nome": "MARIA HELENA CANUTO SANTOS",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -57,6 +57,22 @@
         },
         {
           "posicao": 7,
+          "nome": "CAROLINA SANTOS GONÇALVES",
+          "turma": "31",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 8,
+          "nome": "LAUREN SILVA DA SILVA",
+          "turma": "31",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 9,
           "nome": "RICARDO GARCIA PIETSCH",
           "turma": "21",
           "leituraAtual": "L1",
@@ -64,7 +80,7 @@
           "destaque": false
         },
         {
-          "posicao": 8,
+          "posicao": 10,
           "nome": "SOPHIA EMANUELY FERREIRA PINHEIRO",
           "turma": "31",
           "leituraAtual": "L1",
@@ -72,7 +88,7 @@
           "destaque": false
         },
         {
-          "posicao": 9,
+          "posicao": 11,
           "nome": "MATHEUS ENRIQUE DOS SANTOS DA SILVA",
           "turma": "21",
           "leituraAtual": "L1",
@@ -80,7 +96,7 @@
           "destaque": false
         },
         {
-          "posicao": 10,
+          "posicao": 12,
           "nome": "MIGUEL JOSEFINO DE MATOS",
           "turma": "21",
           "leituraAtual": "L1",
@@ -88,7 +104,7 @@
           "destaque": false
         },
         {
-          "posicao": 11,
+          "posicao": 13,
           "nome": "VALENTINA PRATES GOULART",
           "turma": "21",
           "leituraAtual": "L1",
@@ -96,7 +112,15 @@
           "destaque": false
         },
         {
-          "posicao": 12,
+          "posicao": 14,
+          "nome": "YASMIN VIVIANE FONSECA DE SOUZA",
+          "turma": "31",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 15,
           "nome": "DIOVANNA ANDRADE SANTOS",
           "turma": "21",
           "leituraAtual": "L1",
@@ -104,7 +128,15 @@
           "destaque": false
         },
         {
-          "posicao": 13,
+          "posicao": 16,
+          "nome": "LUIZ GUSTAVO TOLEDO URBANSKI",
+          "turma": "31",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 17,
           "nome": "JAMILY MANUELA FONSECA DE SOUZA",
           "turma": "21",
           "leituraAtual": "L1",

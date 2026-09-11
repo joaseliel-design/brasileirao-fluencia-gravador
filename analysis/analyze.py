@@ -560,6 +560,63 @@ def transcribe(model, job):
         try: os.unlink(path)
         except OSError: pass
 
+def canonical_prefix_for_words(text, word_count):
+    """Return the canonical prefix through the last attempted word.
+
+    Punctuation between attempted words is preserved. Punctuation after the
+    final attempted word is intentionally excluded because there is no
+    following spoken word with which to evaluate that boundary.
+    """
+    pattern = re.compile(r"[A-Za-zÀ-ÿ0-9]+(?:[-’'][A-Za-zÀ-ÿ0-9]+)*")
+    matches = list(pattern.finditer(text or ""))
+    n = int(word_count or 0)
+    if not matches or n <= 0:
+        return ""
+    n = min(n, len(matches))
+    return (text or "")[:matches[n-1].end()]
+
+
+def zero_rhythm(reason, connected_matches, attempted_words):
+    return {
+        "status": reason,
+        "versao": "RITMO_AUTO_V1",
+        "continuidade": {"nota": 0.0, "penalidade": 45.0},
+        "regularidade": {"nota": 0.0, "cv_local": 0.0, "taxa_local_media_ppm": 0.0},
+        "hesitacoes_reinicios": {
+            "nota": 0.0,
+            "stalls_extras": 0,
+            "repeticoes": 0,
+            "autocorrecoes": 0,
+        },
+        "ritmo_pct": 0.0,
+        "regra_duracao_interna": "NAO_PENALIZA_DIRETAMENTE",
+        "evidencia_leitura_conectada": {
+            "palavras_canonicas_reconhecidas": int(connected_matches),
+            "palavras_canonicas_tentadas": int(attempted_words),
+            "limiar_minimo": 10,
+        },
+    }
+
+
+def zero_prosody(reason, connected_matches, attempted_words):
+    return {
+        "status": reason,
+        "versao": "PROSODIA_AUTO_V1",
+        "motor_acustico": "NAO_APLICADO",
+        "pontuacao_pausas": {"nota": 0.0, "limite": 40},
+        "entonacao": {"nota": 0.0, "limite": 35},
+        "fraseamento_significado": {"nota": 0.0, "limite": 25},
+        "prosodia_pct": 0.0,
+        "regra_sem_prosodia": "SEM_LEITURA_CONECTADA_RECEBE_ZERO",
+        "evidencia_leitura_conectada": {
+            "palavras_canonicas_reconhecidas": int(connected_matches),
+            "palavras_canonicas_tentadas": int(attempted_words),
+            "limiar_minimo": 10,
+        },
+        "homologacao": "OPERACIONAL_CVS_R1",
+    }
+
+
 def process_job(model, job):
     transcript, timed_words, lang_prob = transcribe(model, job)
     if not timed_words:
@@ -573,16 +630,32 @@ def process_job(model, job):
     ops = align(canon_n, obs_n)
     counts, events = classify_events(ops, raw_canon, raw_obs, timed_words)
 
-    ppm, words60 = speed_from_alignment(
-        ops, timed_words, job.get("duration_s"), bool(job.get("concluded_text")), len(raw_canon)
-    )
-    v_idx = speed_index(ppm, job["turma"], job["categoria"])
+    concluded = bool(job.get("concluded_text"))
 
-    # PRECISÃO OFICIAL v1 — leituras concluídas:
+    # Evidência objetiva de leitura conectada:
+    # cada MATCH é uma palavra canônica efetivamente reconhecida pelo ASR
+    # em alinhamento monotônico com o texto. Menos de 10 palavras reconhecidas
+    # numa leitura não concluída = SEM_LEITURA_CONECTADA.
+    connected_matches = sum(1 for op in ops if op["type"] == "MATCH")
+    progressed_positions = [
+        op["ci"]
+        for op in ops
+        if op.get("ci") is not None
+        and op.get("oj") is not None
+        and op["type"] in ("MATCH", "SUB")
+    ]
+    attempted_words = (max(progressed_positions) + 1) if progressed_positions else 0
+
+    if concluded:
+        reading_classification = "LEITURA_COMPLETA"
+    elif connected_matches < 10:
+        reading_classification = "SEM_LEITURA_CONECTADA"
+    else:
+        reading_classification = "LEITURA_INCOMPLETA"
+
+    # PRECISÃO OFICIAL v1:
     # P = 100 * (N - S - O) / (N + I)
-    # N = palavras canônicas; S = substituições; O = omissões; I = inserções.
-    # Repetições e autocorreções bem-sucedidas não reduzem a precisão.
-    # Leituras interrompidas/incompletas permanecem fora desta homologação.
+    # Em leitura incompleta, toda parte canônica não lida permanece como omissão.
     n = len(raw_canon)
     s = counts["substitutions"]
     o = counts["omissions"]
@@ -590,12 +663,55 @@ def process_job(model, job):
     correct = max(0, n - s - o)
     denominator = max(1, n + i)
     precision_official = round(max(0, min(100, (correct / denominator) * 100)), 2)
+
     counts["canonical_words"] = n
     counts["precision_correct"] = correct
     counts["precision_denominator"] = denominator
+    counts["connected_match_words"] = int(connected_matches)
+    counts["attempted_canonical_words"] = int(attempted_words)
+    counts["reading_classification"] = reading_classification
 
-    rhythm = rhythm_score(ops, timed_words, job["canonical_text"], counts)
-    prosody = prosody_score(job, ops, timed_words, job["canonical_text"])
+    if reading_classification == "SEM_LEITURA_CONECTADA":
+        # Soletração, letras isoladas ou fragmentos sem leitura conectada:
+        # velocidade, ritmo e prosódia recebem zero. A precisão continua sendo
+        # calculada contra o texto canônico, sem intervenção humana.
+        ppm = 0.0
+        words60 = 0
+        v_idx = 0.0
+        rhythm = zero_rhythm(reading_classification, connected_matches, attempted_words)
+        prosody = zero_prosody(reading_classification, connected_matches, attempted_words)
+    else:
+        ppm, words60 = speed_from_alignment(
+            ops,
+            timed_words,
+            job.get("duration_s"),
+            concluded,
+            len(raw_canon),
+        )
+        v_idx = speed_index(ppm, job["turma"], job["categoria"])
+
+        # Para leitura incompleta, ritmo e prosódia consideram somente o trecho
+        # efetivamente tentado. O trecho abandonado penaliza a precisão, não
+        # cria pausas ou entonação fictícias.
+        analysis_text = (
+            job["canonical_text"]
+            if concluded
+            else canonical_prefix_for_words(job["canonical_text"], attempted_words)
+        )
+        rhythm = rhythm_score(ops, timed_words, analysis_text, counts)
+        prosody = prosody_score(job, ops, timed_words, analysis_text)
+        rhythm["reading_classification"] = reading_classification
+        rhythm["evidencia_leitura_conectada"] = {
+            "palavras_canonicas_reconhecidas": int(connected_matches),
+            "palavras_canonicas_tentadas": int(attempted_words),
+            "limiar_minimo": 10,
+        }
+        prosody["reading_classification"] = reading_classification
+        prosody["evidencia_leitura_conectada"] = {
+            "palavras_canonicas_reconhecidas": int(connected_matches),
+            "palavras_canonicas_tentadas": int(attempted_words),
+            "limiar_minimo": 10,
+        }
 
     total_100 = round(max(0.0, min(100.0,
         precision_official * 0.35
@@ -610,6 +726,9 @@ def process_job(model, job):
         "transcript": transcript,
         "words": timed_words,
         "language_probability": lang_prob,
+        "reading_classification": reading_classification,
+        "connected_match_words": int(connected_matches),
+        "attempted_canonical_words": int(attempted_words),
         "words_60s": words60,
         "ppm": ppm,
         "speed_index": v_idx,
@@ -626,6 +745,7 @@ def process_job(model, job):
         "prosody_details": prosody,
         "total_100": total_100,
     }
+
 
 def main():
     print(f"Starting CVS fluency worker with model={MODEL_SIZE}, max_jobs={MAX_JOBS}")

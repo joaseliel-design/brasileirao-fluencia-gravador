@@ -134,6 +134,139 @@ def classify_events(ops, raw_canon, raw_obs, timed_words):
                 events.append({"tipo":"INSERCAO","lido":raw_obs[oi]})
     return counts, events
 
+def canonical_marks(text):
+    pattern = re.compile(r"[A-Za-zÀ-ÿ0-9]+(?:[-’'][A-Za-zÀ-ÿ0-9]+)*")
+    matches = list(pattern.finditer(text or ""))
+    marks = []
+    for idx, match in enumerate(matches):
+        next_start = matches[idx+1].start() if idx + 1 < len(matches) else len(text or "")
+        marks.append((text or "")[match.end():next_start])
+    return marks
+
+def rhythm_regularity_score(cv):
+    if cv <= 0.20:
+        score = 35
+    elif cv <= 0.30:
+        score = 35 - ((cv - 0.20) / 0.10) * 5
+    elif cv <= 0.45:
+        score = 30 - ((cv - 0.30) / 0.15) * 10
+    elif cv <= 0.60:
+        score = 20 - ((cv - 0.45) / 0.15) * 10
+    else:
+        score = max(0, 10 - ((cv - 0.60) / 0.40) * 10)
+    return round(max(0, min(35, score)), 2)
+
+def rhythm_score(ops, timed_words, canonical_text, counts):
+    """Ritmo oficial v1 (0–100), separado de velocidade.
+
+    Continuidade 45:
+      penaliza pausas residuais entre tokens depois de tolerar pontuação.
+    Regularidade 35:
+      usa o CV da taxa local em janelas de 5 palavras sem cruzar pontuação.
+    Hesitações/Reinícios 20:
+      penaliza stalls relevantes, repetições e autocorreções.
+
+    Duração longa dentro de uma palavra NÃO gera penalização direta.
+    """
+    marks = canonical_marks(canonical_text)
+    obs_to_canon = {}
+    for op in ops:
+        if op.get("oj") is not None and op.get("ci") is not None:
+            obs_to_canon[op["oj"]] = op["ci"]
+
+    residuals = []
+    continuity_penalty = 0.0
+
+    for j in range(len(timed_words) - 1):
+        end = timed_words[j].get("end")
+        start_next = timed_words[j+1].get("start")
+        if end is None or start_next is None:
+            continue
+
+        gap = max(0.0, float(start_next) - float(end))
+        ci = obs_to_canon.get(j)
+        mark = marks[ci] if ci is not None and ci < len(marks) else ""
+
+        if re.search(r"[.!?;:]", mark):
+            allowance = 0.75
+        elif "," in mark:
+            allowance = 0.45
+        else:
+            allowance = 0.0
+
+        residual = max(0.0, gap - allowance)
+        residuals.append(residual)
+
+        if residual >= 1.0:
+            continuity_penalty += 5.0
+        elif residual >= 0.60:
+            continuity_penalty += 2.5
+        elif residual >= 0.35:
+            continuity_penalty += 1.0
+
+    continuity = round(max(0.0, 45.0 - continuity_penalty), 2)
+
+    local_rates = []
+    for j in range(len(timed_words) - 4):
+        crosses_punctuation = False
+        for k in range(j, j + 4):
+            ci = obs_to_canon.get(k)
+            mark = marks[ci] if ci is not None and ci < len(marks) else ""
+            if re.search(r"[,\.!?;:]", mark):
+                crosses_punctuation = True
+                break
+        if crosses_punctuation:
+            continue
+
+        start = timed_words[j].get("start")
+        end = timed_words[j+4].get("end")
+        if start is None or end is None:
+            continue
+        span = float(end) - float(start)
+        if span > 0:
+            local_rates.append((5.0 / span) * 60.0)
+
+    if local_rates:
+        mean_rate = sum(local_rates) / len(local_rates)
+        variance = sum((x - mean_rate) ** 2 for x in local_rates) / len(local_rates)
+        sd_rate = variance ** 0.5
+        cv = (sd_rate / mean_rate) if mean_rate > 0 else 0.0
+        regularity = rhythm_regularity_score(cv)
+    else:
+        mean_rate = 0.0
+        cv = 0.0
+        regularity = 0.0
+
+    extra_stalls = sum(1 for x in residuals if x >= 0.60)
+    repetitions = int(counts.get("repetitions", 0) or 0)
+    autocorrections = int(counts.get("autocorrections", 0) or 0)
+    hesitation = max(0.0, 20.0 - 2.0 * (extra_stalls + repetitions + autocorrections))
+    hesitation = round(hesitation, 2)
+
+    total = round(max(0.0, min(100.0, continuity + regularity + hesitation)), 2)
+
+    return {
+        "status": "OFICIAL_V1_TIMESTAMPS",
+        "versao": "RITMO_AUTO_V1",
+        "continuidade": {
+            "nota": continuity,
+            "penalidade": round(continuity_penalty, 2),
+        },
+        "regularidade": {
+            "nota": regularity,
+            "cv_local": round(cv, 6),
+            "taxa_local_media_ppm": round(mean_rate, 2),
+        },
+        "hesitacoes_reinicios": {
+            "nota": hesitation,
+            "stalls_extras": extra_stalls,
+            "repeticoes": repetitions,
+            "autocorrecoes": autocorrections,
+        },
+        "ritmo_pct": total,
+        "regra_duracao_interna": "NAO_PENALIZA_DIRETAMENTE",
+    }
+
 def speed_from_alignment(ops, timed_words, duration, concluded, canonical_count):
     duration = float(duration or 0)
     if concluded and duration > 0 and duration <= 60:
@@ -236,6 +369,8 @@ def process_job(model, job):
     counts["precision_correct"] = correct
     counts["precision_denominator"] = denominator
 
+    rhythm = rhythm_score(ops, timed_words, job["canonical_text"], counts)
+
     return {
         "leitura_id": job["leitura_id"],
         "engine": f"faster-whisper/{MODEL_SIZE}",
@@ -245,10 +380,14 @@ def process_job(model, job):
         "words_60s": words60,
         "ppm": ppm,
         "speed_index": v_idx,
+        "precision_pct": precision_official,
         "precision_candidate_pct": precision_official,
         "precision_formula_status": "OFICIAL_V1_(N-S-O)/(N+I)",
         "counts": counts,
         "events": events,
+        "rhythm_pct": rhythm["ritmo_pct"],
+        "rhythm_status": rhythm["status"],
+        "rhythm_details": rhythm,
     }
 
 def main():

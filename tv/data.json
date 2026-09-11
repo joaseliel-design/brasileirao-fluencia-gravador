@@ -1,8 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-11T15:03:57Z",
-  "fonte": "base_central_live",
+  "atualizado_em": "2026-09-11T16:26:29.229Z",
   "categorias": [
     {
       "categoria": 1,
@@ -150,6 +149,14 @@
       "ranking": [
         {
           "posicao": 1,
+          "nome": "ESTELLA MOURA ANTONIO",
+          "turma": "51",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": true
+        },
+        {
+          "posicao": 2,
           "nome": "ALICE FLORES DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -157,7 +164,7 @@
           "destaque": true
         },
         {
-          "posicao": 2,
+          "posicao": 3,
           "nome": "ANA LUISA SANTOS DE FRAGA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -165,12 +172,52 @@
           "destaque": true
         },
         {
-          "posicao": 3,
-          "nome": "AMANDA PERES BRAZ DA SILVA",
-          "turma": "41",
+          "posicao": 4,
+          "nome": "LARISSA DA LUZ SILVA",
+          "turma": "51",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true
+        },
+        {
+          "posicao": 5,
+          "nome": "ALANA IRIBARREM DE VARGAS",
+          "turma": "51",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": true
+        },
+        {
+          "posicao": 6,
+          "nome": "ANA LAURA RAUPP SOUZA",
+          "turma": "51",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": true
+        },
+        {
+          "posicao": 7,
+          "nome": "SOFIA SANHUDO MALTA",
+          "turma": "51",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 8,
+          "nome": "AMANDA PERES BRAZ DA SILVA",
+          "turma": "41",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 9,
+          "nome": "ARTHUR MALTA PAVÃO",
+          "turma": "51",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
         }
       ]
     }

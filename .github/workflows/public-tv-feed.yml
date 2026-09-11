@@ -1,0 +1,53 @@
+name: Atualiza ranking público TV
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: public-tv-feed
+  cancel-in-progress: true
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Buscar ranking sanitizado
+        env:
+          BRIDGE_URL: ${{ secrets.CVS_BRIDGE_URL }}
+          BRIDGE_TOKEN: ${{ secrets.CVS_BRIDGE_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$BRIDGE_URL"
+          test -n "$BRIDGE_TOKEN"
+          payload=$(jq -nc --arg token "$BRIDGE_TOKEN" '{action:"public_ranking",token:$token}')
+          curl -fsSL --retry 3 --retry-delay 2 \
+            -H 'Content-Type: application/json' \
+            -d "$payload" \
+            "$BRIDGE_URL" > /tmp/tv-data.json
+          jq -e '.ok == true and .somente_leitura == true and (.categorias | type == "array")' /tmp/tv-data.json >/dev/null
+          mkdir -p tv
+          jq '.' /tmp/tv-data.json > tv/data.json
+
+      - name: Publicar apenas se mudou
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- tv/data.json; then
+            echo "Ranking sem mudança."
+            exit 0
+          fi
+          git config user.name "CVS Ranking Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add tv/data.json
+          git commit -m "data: atualiza ranking público TV"
+          git push

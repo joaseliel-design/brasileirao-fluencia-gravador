@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-11T19:20:31.745Z",
+  "atualizado_em": "2026-09-11T19:32:07.906Z",
   "categorias": [
     {
       "categoria": 1,
@@ -189,87 +189,87 @@
         },
         {
           "posicao": 5,
-          "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
-          "turma": "41",
+          "nome": "JOÃO PEDRO PEREIRA DE AVILA",
+          "turma": "61",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true
         },
         {
           "posicao": 6,
-          "nome": "GUILHERME TRINDADE SOARES",
+          "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": true
         },
         {
           "posicao": 7,
-          "nome": "LARISSA DA LUZ SILVA",
-          "turma": "51",
+          "nome": "GUILHERME TRINDADE SOARES",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 8,
-          "nome": "ALANA IRIBARREM DE VARGAS",
+          "nome": "LARISSA DA LUZ SILVA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 9,
-          "nome": "ANA LAURA RAUPP SOUZA",
+          "nome": "ALANA IRIBARREM DE VARGAS",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 10,
-          "nome": "IAGO ALMEIDA RODRIGUES",
-          "turma": "41",
+          "nome": "ANA LAURA RAUPP SOUZA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 11,
-          "nome": "SOFIA SANHUDO MALTA",
-          "turma": "51",
+          "nome": "MIGUEL MACHADO ARAÚJO",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 12,
-          "nome": "HISYS SILVEIRA LUCAS",
+          "nome": "IAGO ALMEIDA RODRIGUES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 13,
-          "nome": "AMANDA PERES BRAZ DA SILVA",
-          "turma": "41",
+          "nome": "SOFIA SANHUDO MALTA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 14,
-          "nome": "JADY DRUM SILVA",
+          "nome": "THAWAN MIGUEL DA SILVA CAVALHEIRO",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 15,
-          "nome": "ISADORA VITÓRIA ALVES AMARAL",
+          "nome": "HISYS SILVEIRA LUCAS",
           "turma": "41",
           "leituraAtual": "L1",
           "variacao": -1,
@@ -277,15 +277,39 @@
         },
         {
           "posicao": 16,
-          "nome": "MAYZA TEIXEIRA DORNELES",
-          "turma": "51",
+          "nome": "AMANDA PERES BRAZ DA SILVA",
+          "turma": "41",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 17,
-          "nome": "ARTHUR MALTA PAVÃO",
+          "nome": "LUÍS GUSTAVO SOARES MALTA",
+          "turma": "41",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 18,
+          "nome": "JADY DRUM SILVA",
+          "turma": "41",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 19,
+          "nome": "ISADORA VITÓRIA ALVES AMARAL",
+          "turma": "41",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 20,
+          "nome": "MAYZA TEIXEIRA DORNELES",
           "turma": "51",
           "leituraAtual": "L1",
           "variacao": -1,

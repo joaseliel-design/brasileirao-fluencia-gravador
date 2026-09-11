@@ -28,6 +28,13 @@ def norm(text):
     s = s.replace("’", "").replace("'", "")
     return re.sub(r"[^a-z0-9-]", "", s)
 
+def as_bool(value):
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return False
+    return str(value).strip().lower() in ("true", "1", "yes", "sim")
+
 def merge_observed_compounds(raw_canon, timed_words):
     """Merge adjacent ASR tokens when they exactly form a hyphenated canonical word.
     Example: canonical 'segunda-feira' and ASR ['segunda', 'feira'] become one observed token.
@@ -630,7 +637,7 @@ def process_job(model, job):
     ops = align(canon_n, obs_n)
     counts, events = classify_events(ops, raw_canon, raw_obs, timed_words)
 
-    concluded = bool(job.get("concluded_text"))
+    concluded = as_bool(job.get("concluded_text"))
 
     # Evidência objetiva de leitura conectada:
     # cada MATCH é uma palavra canônica efetivamente reconhecida pelo ASR

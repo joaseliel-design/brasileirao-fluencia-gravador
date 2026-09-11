@@ -5,7 +5,7 @@ from faster_whisper import WhisperModel
 
 BRIDGE_URL = os.environ["BRIDGE_URL"].strip()
 BRIDGE_TOKEN = os.environ["BRIDGE_TOKEN"].strip()
-MODEL_SIZE = os.environ.get("FW_MODEL", "small").strip()
+MODEL_SIZE = os.environ.get("FW_MODEL", "medium").strip()
 MAX_JOBS = int(os.environ.get("MAX_JOBS", "2"))
 
 def bridge(action, **payload):
@@ -220,10 +220,21 @@ def process_job(model, job):
     )
     v_idx = speed_index(ppm, job["turma"], job["categoria"])
 
-    # Precision score is intentionally NOT made official here yet:
-    # the project still needs to homologate the denominator/formula.
-    lexical_errors = counts["substitutions"] + counts["omissions"] + counts["insertions"]
-    precision_candidate = round(max(0, (len(raw_canon)-lexical_errors)/max(1,len(raw_canon))*100), 2)
+    # PRECISÃO OFICIAL v1 — leituras concluídas:
+    # P = 100 * (N - S - O) / (N + I)
+    # N = palavras canônicas; S = substituições; O = omissões; I = inserções.
+    # Repetições e autocorreções bem-sucedidas não reduzem a precisão.
+    # Leituras interrompidas/incompletas permanecem fora desta homologação.
+    n = len(raw_canon)
+    s = counts["substitutions"]
+    o = counts["omissions"]
+    i = counts["insertions"]
+    correct = max(0, n - s - o)
+    denominator = max(1, n + i)
+    precision_official = round(max(0, min(100, (correct / denominator) * 100)), 2)
+    counts["canonical_words"] = n
+    counts["precision_correct"] = correct
+    counts["precision_denominator"] = denominator
 
     return {
         "leitura_id": job["leitura_id"],
@@ -234,8 +245,8 @@ def process_job(model, job):
         "words_60s": words60,
         "ppm": ppm,
         "speed_index": v_idx,
-        "precision_candidate_pct": precision_candidate,
-        "precision_formula_status": "CANDIDATA_NAO_OFICIAL",
+        "precision_candidate_pct": precision_official,
+        "precision_formula_status": "OFICIAL_V1_(N-S-O)/(N+I)",
         "counts": counts,
         "events": events,
     }

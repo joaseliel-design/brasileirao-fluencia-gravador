@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-11T20:06:55.564Z",
+  "atualizado_em": "2026-09-11T20:37:14.963Z",
   "categorias": [
     {
       "categoria": 1,
@@ -288,7 +288,7 @@
           "nome": "AMANDA PERES BRAZ DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -296,7 +296,7 @@
           "nome": "LUÍS GUSTAVO SOARES MALTA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -304,7 +304,7 @@
           "nome": "JADY DRUM SILVA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -312,7 +312,7 @@
           "nome": "ISADORA VITÓRIA ALVES AMARAL",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         }
       ]

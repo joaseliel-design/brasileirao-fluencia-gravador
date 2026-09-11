@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-11T18:41:44.453Z",
+  "atualizado_em": "2026-09-11T18:53:31.834Z",
   "categorias": [
     {
       "categoria": 1,
@@ -157,6 +157,14 @@
       "ranking": [
         {
           "posicao": 1,
+          "nome": "ANTHONIA DA SILVA LUCAS",
+          "turma": "41",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": true
+        },
+        {
+          "posicao": 2,
           "nome": "ESTELLA MOURA ANTONIO",
           "turma": "51",
           "leituraAtual": "L1",
@@ -164,7 +172,7 @@
           "destaque": true
         },
         {
-          "posicao": 2,
+          "posicao": 3,
           "nome": "ALICE FLORES DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -172,7 +180,7 @@
           "destaque": true
         },
         {
-          "posicao": 3,
+          "posicao": 4,
           "nome": "ANA LUISA SANTOS DE FRAGA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -180,7 +188,15 @@
           "destaque": true
         },
         {
-          "posicao": 4,
+          "posicao": 5,
+          "nome": "GUILHERME TRINDADE SOARES",
+          "turma": "41",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": true
+        },
+        {
+          "posicao": 6,
           "nome": "LARISSA DA LUZ SILVA",
           "turma": "51",
           "leituraAtual": "L1",
@@ -188,24 +204,8 @@
           "destaque": true
         },
         {
-          "posicao": 5,
-          "nome": "ALANA IRIBARREM DE VARGAS",
-          "turma": "51",
-          "leituraAtual": "L1",
-          "variacao": 0,
-          "destaque": true
-        },
-        {
-          "posicao": 6,
-          "nome": "ANA LAURA RAUPP SOUZA",
-          "turma": "51",
-          "leituraAtual": "L1",
-          "variacao": 0,
-          "destaque": true
-        },
-        {
           "posicao": 7,
-          "nome": "SOFIA SANHUDO MALTA",
+          "nome": "ALANA IRIBARREM DE VARGAS",
           "turma": "51",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -213,15 +213,15 @@
         },
         {
           "posicao": 8,
-          "nome": "AMANDA PERES BRAZ DA SILVA",
-          "turma": "41",
+          "nome": "ANA LAURA RAUPP SOUZA",
+          "turma": "51",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 9,
-          "nome": "MAYZA TEIXEIRA DORNELES",
+          "nome": "SOFIA SANHUDO MALTA",
           "turma": "51",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -229,10 +229,34 @@
         },
         {
           "posicao": 10,
+          "nome": "HISYS SILVEIRA LUCAS",
+          "turma": "41",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 11,
+          "nome": "AMANDA PERES BRAZ DA SILVA",
+          "turma": "41",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 12,
+          "nome": "MAYZA TEIXEIRA DORNELES",
+          "turma": "51",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 13,
           "nome": "ARTHUR MALTA PAVÃO",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         }
       ]

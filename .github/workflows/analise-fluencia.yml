@@ -1,4 +1,4 @@
-name: Análise de Fluência — automática e manual
+name: Análise de Fluência — pronta para automática
 
 on:
   workflow_dispatch:
@@ -15,8 +15,6 @@ on:
         options:
           - medium
           - small
-  schedule:
-    - cron: "*/5 * * * *"
 
 permissions:
   contents: read

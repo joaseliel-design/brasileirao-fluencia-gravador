@@ -182,6 +182,7 @@ def transcribe(model, job):
             language="pt",
             task="transcribe",
             beam_size=5,
+            temperature=0.0,
             word_timestamps=True,
             vad_filter=False,
             condition_on_previous_text=True,

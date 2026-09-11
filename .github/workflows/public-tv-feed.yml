@@ -34,6 +34,7 @@ jobs:
             -H 'Content-Type: application/json' \
             -d "$payload" \
             "$BRIDGE_URL" > /tmp/tv-data.json
+          jq -c '{ok,somente_leitura,error,categorias_tipo:(.categorias|type)}' /tmp/tv-data.json
           jq -e '.ok == true and .somente_leitura == true and (.categorias | type == "array")' /tmp/tv-data.json >/dev/null
           mkdir -p tv
           jq '.' /tmp/tv-data.json > tv/data.json

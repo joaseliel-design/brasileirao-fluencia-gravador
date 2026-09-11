@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-11T19:43:55.853Z",
+  "atualizado_em": "2026-09-11T19:53:42.387Z",
   "categorias": [
     {
       "categoria": 1,
@@ -200,7 +200,7 @@
           "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": true
         },
         {
@@ -208,7 +208,7 @@
           "nome": "GUILHERME TRINDADE SOARES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -216,7 +216,7 @@
           "nome": "LARISSA DA LUZ SILVA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -224,7 +224,7 @@
           "nome": "ALANA IRIBARREM DE VARGAS",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -232,7 +232,7 @@
           "nome": "ANA LAURA RAUPP SOUZA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -240,7 +240,7 @@
           "nome": "MIGUEL MACHADO ARAÚJO",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -248,7 +248,7 @@
           "nome": "IAGO ALMEIDA RODRIGUES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -256,7 +256,7 @@
           "nome": "SOFIA SANHUDO MALTA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -264,7 +264,7 @@
           "nome": "THAWAN MIGUEL DA SILVA CAVALHEIRO",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -272,11 +272,19 @@
           "nome": "HISYS SILVEIRA LUCAS",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 16,
+          "nome": "ANITA SCHÜTZER",
+          "turma": "61",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 17,
           "nome": "AMANDA PERES BRAZ DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -284,7 +292,7 @@
           "destaque": false
         },
         {
-          "posicao": 17,
+          "posicao": 18,
           "nome": "LUÍS GUSTAVO SOARES MALTA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -292,7 +300,7 @@
           "destaque": false
         },
         {
-          "posicao": 18,
+          "posicao": 19,
           "nome": "JADY DRUM SILVA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -300,17 +308,9 @@
           "destaque": false
         },
         {
-          "posicao": 19,
+          "posicao": 20,
           "nome": "ISADORA VITÓRIA ALVES AMARAL",
           "turma": "41",
-          "leituraAtual": "L1",
-          "variacao": -1,
-          "destaque": false
-        },
-        {
-          "posicao": 20,
-          "nome": "MAYZA TEIXEIRA DORNELES",
-          "turma": "51",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false

@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-11T16:49:55.393Z",
+  "atualizado_em": "2026-09-11T16:59:51.334Z",
   "categorias": [
     {
       "categoria": 1,
@@ -35,7 +35,7 @@
           "nome": "CAIO BOHMGAHREN VARGAS",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 1,
+          "variacao": -1,
           "destaque": true
         },
         {
@@ -43,7 +43,7 @@
           "nome": "LUNA VICTÓRIA GRANVILLE DE MATOS",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 1,
           "destaque": true
         },
         {
@@ -107,7 +107,7 @@
           "nome": "MIGUEL JOSEFINO DE MATOS",
           "turma": "21",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -115,7 +115,7 @@
           "nome": "VALENTINA PRATES GOULART",
           "turma": "21",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -123,7 +123,7 @@
           "nome": "YASMIN VIVIANE FONSECA DE SOUZA",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -131,7 +131,7 @@
           "nome": "DIOVANNA ANDRADE SANTOS",
           "turma": "21",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -139,7 +139,7 @@
           "nome": "LUIZ GUSTAVO TOLEDO URBANSKI",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -147,7 +147,7 @@
           "nome": "JAMILY MANUELA FONSECA DE SOUZA",
           "turma": "21",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         }
       ]
@@ -232,7 +232,7 @@
           "nome": "ARTHUR MALTA PAVÃO",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         }
       ]

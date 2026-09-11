@@ -1,24 +1,53 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
-  <meta name="referrer" content="no-referrer">
-  <title>Brasileirão da Fluência — Ranking ao Vivo</title>
-  <style>
-    html,body{margin:0;width:100%;height:100%;background:#f7f7f7;font-family:Arial,Helvetica,sans-serif}
-    body{display:flex;align-items:center;justify-content:center;color:#111}
-    .box{text-align:center;padding:24px}.live{font-weight:800;font-size:22px}.muted{margin-top:10px;color:#667085}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>Brasileirão da Fluência — Ranking ao Vivo</title>
+<style>
+:root{--bg:#f7f7f7;--panel:#fff;--line:#d6dbe5;--head:#eef2f7;--muted:#667085;--green:#137333;--red:#b3261e;--amber:#b54708}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:#111;overflow:hidden}
+.wrap{width:100%;height:100vh;padding:3.2vh 2.8vw 2vh;display:flex;flex-direction:column}
+h1{margin:0 0 2.1vh;text-align:center;font-size:clamp(25px,2.35vw,52px);line-height:1.02;font-weight:900;letter-spacing:.025em}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5vw;flex:1;min-height:0}
+.panel{display:flex;flex-direction:column;min-height:0;background:var(--panel);border:2px solid var(--line);border-radius:20px;box-shadow:0 2px 10px rgba(0,0,0,.05);overflow:hidden}
+.panel-header{padding:1.25vh 1vw .85vh;border-bottom:1px solid #dfe4ec;background:#f2f5fa;text-align:center}
+h2{margin:0;font-size:clamp(21px,1.55vw,34px);font-weight:900}
+.table-wrap{padding:0 .55vw .4vh;flex:1;min-height:0}.empty{height:100%;display:flex;align-items:center;justify-content:center;color:#666;font-size:clamp(18px,1.25vw,28px);font-weight:700}
+table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed}th{height:3.6vh;padding:0 .45vw;border-bottom:1px solid #d7d7d7;background:var(--head);font-size:clamp(13px,.95vw,20px);font-weight:800;text-align:center}th:first-child{border-top-left-radius:12px}th:last-child{border-top-right-radius:12px}
+td{height:2.95vh;padding:0 .45vw;border-bottom:1px solid #eceff3;font-size:clamp(12px,.9vw,19px);vertical-align:middle;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pos{width:13%;text-align:center;font-weight:800}.name{width:57%;font-weight:500}.read{width:14%;text-align:center}.var{width:16%;text-align:center}.stage{display:inline-block;padding:.08em .46em;border:1px solid #bdbdbd;border-radius:999px;font-size:.78em;font-weight:900;background:#fff}
+.top12 td{background:#fff8df}.top34 td{background:#f4f4f4}.top56 td{background:#fbefe5}.top6 td{font-weight:800}.up{color:var(--green);font-weight:900}.down{color:var(--red);font-weight:900}
+.footer{margin-top:.7vh;min-height:1.3em;text-align:right;font-size:clamp(11px,.82vw,17px);color:var(--muted)}.live{color:var(--green);font-weight:900}.reconnecting{color:var(--amber);font-weight:900}.offline{color:var(--red);font-weight:900}
+.dense td{height:2.58vh;font-size:clamp(11px,.83vw,18px)}.compact td{height:2.28vh;font-size:clamp(10px,.76vw,17px)}.max td{height:2.03vh;font-size:clamp(10px,.70vw,16px)}
+@media(max-width:900px){.wrap{padding:2vh 2vw}.grid{grid-template-columns:1fr;overflow:auto}.panel{min-height:44vh}html,body{overflow:auto}h1{font-size:clamp(22px,5vw,38px)}}
+@media(max-height:760px) and (min-width:901px){.wrap{padding:2.2vh 2.8vw 1.4vh}h1{margin-bottom:1.4vh}.panel-header{padding:.8vh 1vw .55vh}th{height:3vh}.footer{margin-top:.35vh}}
+</style>
 </head>
 <body>
-  <div class="box">
-    <div class="live">● RANKING AO VIVO</div>
-    <div class="muted">Abrindo o placar...</div>
-  </div>
-  <script>
-    location.replace('https://script.google.com/macros/s/AKfycbyMHQSRRR06jWJEGuMZBwflwBQxV6m-iZoRW42JbJdmdxNsP5MyGitBEf9aG-OZ6pPm/exec?tv=1');
-  </script>
+<main class="wrap">
+  <h1>BRASILEIRÃO DA FLUÊNCIA — RANKING AO VIVO</h1>
+  <div id="grid" class="grid"></div>
+  <div id="footer" class="footer"><span class="reconnecting">○ CONECTANDO...</span></div>
+</main>
+<script>
+const DATA_URL='./data.json';
+const REFRESH_MS=10000;
+const STALE_MS=8*60*1000;
+let lastGood=null,lastFetchAt=0;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function variation(v){const n=Number(v||0);if(n>0)return `<span class="up">▲ ${n}</span>`;if(n<0)return `<span class="down">▼ ${Math.abs(n)}</span>`;return '—'}
+function density(n){if(n>=18)return'max';if(n>=14)return'compact';if(n>=10)return'dense';return''}
+function panel(cat,rows){rows=Array.isArray(rows)?rows.slice(0,20):[];if(!rows.length)return `<section class="panel"><div class="panel-header"><h2>Categoria ${cat}</h2></div><div class="table-wrap"><div class="empty">Aguardando leituras processadas</div></div></section>`;
+ const body=rows.map(x=>{const p=Number(x.posicao||0);let cls='';if(p<=2)cls='top6 top12';else if(p<=4)cls='top6 top34';else if(p<=6)cls='top6 top56';const medal=p<=2?'🥇':p<=4?'🥈':p<=6?'🥉':'';const stage=x.leituraAtual?`<span class="stage">${esc(x.leituraAtual)}</span>`:'—';return `<tr class="${cls}"><td class="pos">${medal?medal+' ':''}${p}º</td><td class="name">${esc(x.nome)}</td><td class="read">${stage}</td><td class="var">${variation(x.variacao)}</td></tr>`}).join('');
+ return `<section class="panel ${density(rows.length)}"><div class="panel-header"><h2>Categoria ${cat}</h2></div><div class="table-wrap"><table><thead><tr><th class="pos">Pos.</th><th class="name">Aluno</th><th class="read">Leitura</th><th class="var">Variação</th></tr></thead><tbody>${body}</tbody></table></div></section>`}
+function fitNames(){requestAnimationFrame(()=>document.querySelectorAll('.name').forEach(el=>{if(el.tagName==='TH')return;el.style.fontSize='';let size=parseFloat(getComputedStyle(el).fontSize)||16;while(el.scrollWidth>el.clientWidth&&size>10){size-=.5;el.style.fontSize=size+'px'}}))}
+function formatTime(iso){try{return new Date(iso).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}catch{return''}}
+function render(data){const cats=data?.categorias||[];const r=c=>cats.find(x=>Number(x.categoria)===c)?.ranking||[];document.getElementById('grid').innerHTML=panel(1,r(1))+panel(2,r(2));fitNames();renderFooter(data)}
+function renderFooter(data){const f=document.getElementById('footer');const ts=data?.atualizado_em;const age=ts?Date.now()-new Date(ts).getTime():Infinity;const t=ts?formatTime(ts):'';if(!lastGood){f.innerHTML='<span class="reconnecting">○ CONECTANDO...</span>';return}if(age>STALE_MS){f.innerHTML=`<span class="reconnecting">○ RECONECTANDO...</span>${t?' · Última atualização '+t:''}`;return}f.innerHTML=`<span class="live">● AO VIVO</span>${t?' · Atualizado '+t:''}`}
+async function load(){try{const res=await fetch(DATA_URL+'?v='+Date.now(),{cache:'no-store'});if(!res.ok)throw new Error('HTTP '+res.status);const data=await res.json();if(!data||data.ok!==true||!Array.isArray(data.categorias))throw new Error('payload inválido');lastGood=data;lastFetchAt=Date.now();render(data)}catch(e){if(lastGood)renderFooter(lastGood);else document.getElementById('footer').innerHTML='<span class="offline">● SEM CONEXÃO</span>'}}
+load();setInterval(load,REFRESH_MS);setInterval(()=>lastGood&&renderFooter(lastGood),5000);
+</script>
 </body>
 </html>

@@ -212,11 +212,11 @@ def main():
             print("No pending compatible readings.")
             break
         rid = job["leitura_id"]
-        print(f"Processing leitura_id={rid}")
+        print("Processing one queued reading.")
         try:
             result = process_job(model, job)
             bridge("result", result=result)
-            print(f"Completed leitura_id={rid}; ppm={result['ppm']}; precision_candidate={result['precision_candidate_pct']}")
+            print("Completed one queued reading.")
         except Exception as exc:
             bridge("error", leitura_id=rid, error=str(exc)[:2000])
             raise

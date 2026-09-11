@@ -123,7 +123,7 @@ def classify_events(ops, raw_canon, raw_obs, timed_words):
                 events.append({"tipo":"REPETICAO","lido":raw_obs[oi]})
             elif next_match and next_match["type"] == "MATCH":
                 sim = difflib.SequenceMatcher(None, inserted, next_match["canon"]).ratio()
-                if sim >= 0.50:
+                if len(inserted) >= 2 and sim >= 0.72:
                     counts["autocorrections"] += 1
                     events.append({"tipo":"AUTOCORRECAO","tentativa":raw_obs[oi],"corrigido_para":raw_canon[next_match["ci"]]})
                 else:

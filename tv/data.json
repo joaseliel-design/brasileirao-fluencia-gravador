@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-11T16:26:29.229Z",
+  "atualizado_em": "2026-09-11T16:49:55.393Z",
   "categorias": [
     {
       "categoria": 1,
@@ -35,7 +35,7 @@
           "nome": "CAIO BOHMGAHREN VARGAS",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": 1,
           "destaque": true
         },
         {
@@ -43,7 +43,7 @@
           "nome": "LUNA VICTÓRIA GRANVILLE DE MATOS",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": true
         },
         {
@@ -75,7 +75,7 @@
           "nome": "RICARDO GARCIA PIETSCH",
           "turma": "21",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -83,7 +83,7 @@
           "nome": "SOPHIA EMANUELY FERREIRA PINHEIRO",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -91,11 +91,19 @@
           "nome": "MATHEUS ENRIQUE DOS SANTOS DA SILVA",
           "turma": "21",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 12,
+          "nome": "ALEXSANDER LOPES DE OLIVEIRA",
+          "turma": "31",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 13,
           "nome": "MIGUEL JOSEFINO DE MATOS",
           "turma": "21",
           "leituraAtual": "L1",
@@ -103,7 +111,7 @@
           "destaque": false
         },
         {
-          "posicao": 13,
+          "posicao": 14,
           "nome": "VALENTINA PRATES GOULART",
           "turma": "21",
           "leituraAtual": "L1",
@@ -111,7 +119,7 @@
           "destaque": false
         },
         {
-          "posicao": 14,
+          "posicao": 15,
           "nome": "YASMIN VIVIANE FONSECA DE SOUZA",
           "turma": "31",
           "leituraAtual": "L1",
@@ -119,7 +127,7 @@
           "destaque": false
         },
         {
-          "posicao": 15,
+          "posicao": 16,
           "nome": "DIOVANNA ANDRADE SANTOS",
           "turma": "21",
           "leituraAtual": "L1",
@@ -127,7 +135,7 @@
           "destaque": false
         },
         {
-          "posicao": 16,
+          "posicao": 17,
           "nome": "LUIZ GUSTAVO TOLEDO URBANSKI",
           "turma": "31",
           "leituraAtual": "L1",
@@ -135,7 +143,7 @@
           "destaque": false
         },
         {
-          "posicao": 17,
+          "posicao": 18,
           "nome": "JAMILY MANUELA FONSECA DE SOUZA",
           "turma": "21",
           "leituraAtual": "L1",
@@ -184,7 +192,7 @@
           "nome": "ALANA IRIBARREM DE VARGAS",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": true
         },
         {
@@ -192,7 +200,7 @@
           "nome": "ANA LAURA RAUPP SOUZA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": true
         },
         {
@@ -200,7 +208,7 @@
           "nome": "SOFIA SANHUDO MALTA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -208,11 +216,19 @@
           "nome": "AMANDA PERES BRAZ DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 9,
+          "nome": "MAYZA TEIXEIRA DORNELES",
+          "turma": "51",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 10,
           "nome": "ARTHUR MALTA PAVÃO",
           "turma": "51",
           "leituraAtual": "L1",

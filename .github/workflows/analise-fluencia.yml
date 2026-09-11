@@ -7,6 +7,14 @@ on:
         description: "Quantidade de leituras a processar neste teste"
         required: false
         default: "1"
+      model:
+        description: "Modelo Faster-Whisper para comparação"
+        required: true
+        default: "small"
+        type: choice
+        options:
+          - small
+          - medium
 
 permissions:
   contents: read
@@ -19,7 +27,7 @@ jobs:
     env:
       BRIDGE_URL: ${{ secrets.CVS_BRIDGE_URL }}
       BRIDGE_TOKEN: ${{ secrets.CVS_BRIDGE_TOKEN }}
-      FW_MODEL: small
+      FW_MODEL: ${{ inputs.model }}
       MAX_JOBS: ${{ inputs.max_jobs }}
 
     steps:
@@ -37,7 +45,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/huggingface
-          key: fluencia-faster-whisper-small-v1
+          key: fluencia-faster-whisper-${{ inputs.model }}-v1
 
       - name: Install dependencies
         run: pip install -r analysis/requirements.txt

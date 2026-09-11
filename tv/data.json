@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-11T19:05:50.108Z",
+  "atualizado_em": "2026-09-11T19:20:31.745Z",
   "categorias": [
     {
       "categoria": 1,
@@ -200,7 +200,7 @@
           "nome": "GUILHERME TRINDADE SOARES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": true
         },
         {
@@ -208,7 +208,7 @@
           "nome": "LARISSA DA LUZ SILVA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -216,7 +216,7 @@
           "nome": "ALANA IRIBARREM DE VARGAS",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -224,7 +224,7 @@
           "nome": "ANA LAURA RAUPP SOUZA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -232,7 +232,7 @@
           "nome": "IAGO ALMEIDA RODRIGUES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -240,7 +240,7 @@
           "nome": "SOFIA SANHUDO MALTA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -248,7 +248,7 @@
           "nome": "HISYS SILVEIRA LUCAS",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -256,11 +256,19 @@
           "nome": "AMANDA PERES BRAZ DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 14,
+          "nome": "JADY DRUM SILVA",
+          "turma": "41",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 15,
           "nome": "ISADORA VITÓRIA ALVES AMARAL",
           "turma": "41",
           "leituraAtual": "L1",
@@ -268,7 +276,7 @@
           "destaque": false
         },
         {
-          "posicao": 15,
+          "posicao": 16,
           "nome": "MAYZA TEIXEIRA DORNELES",
           "turma": "51",
           "leituraAtual": "L1",
@@ -276,7 +284,7 @@
           "destaque": false
         },
         {
-          "posicao": 16,
+          "posicao": 17,
           "nome": "ARTHUR MALTA PAVÃO",
           "turma": "51",
           "leituraAtual": "L1",

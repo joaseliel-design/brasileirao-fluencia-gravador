@@ -10,11 +10,11 @@ on:
       model:
         description: "Modelo Faster-Whisper para comparação"
         required: true
-        default: "small"
+        default: "medium"
         type: choice
         options:
-          - small
           - medium
+          - small
 
 permissions:
   contents: read

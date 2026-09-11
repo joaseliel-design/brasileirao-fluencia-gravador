@@ -24,7 +24,7 @@ permissions:
 
 concurrency:
   group: fluencia-analysis
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   transcrever:
@@ -54,12 +54,16 @@ jobs:
           path: ~/.cache/huggingface
           key: fluencia-faster-whisper-${{ env.FW_MODEL }}-v1
 
-      - name: Install ffmpeg if needed
+      - name: Ensure ffmpeg
         shell: bash
+        timeout-minutes: 5
         run: |
-          if ! command -v ffmpeg >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install -y ffmpeg
+          if command -v ffmpeg >/dev/null 2>&1; then
+            ffmpeg -version | head -n 1
+          else
+            timeout 180s sudo apt-get update -qq
+            timeout 180s sudo apt-get install -y ffmpeg
+            ffmpeg -version | head -n 1
           fi
 
       - name: Install dependencies

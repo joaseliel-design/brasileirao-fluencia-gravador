@@ -1,4 +1,4 @@
-import os, re, json, base64, tempfile, unicodedata, difflib, subprocess, math
+import os, re, json, base64, tempfile, unicodedata, difflib, subprocess, math, time
 from pathlib import Path
 import requests
 import numpy as np
@@ -9,15 +9,66 @@ BRIDGE_URL = os.environ["BRIDGE_URL"].strip()
 BRIDGE_TOKEN = os.environ["BRIDGE_TOKEN"].strip()
 MODEL_SIZE = os.environ.get("FW_MODEL", "medium").strip()
 MAX_JOBS = int(os.environ.get("MAX_JOBS", "2"))
+BRIDGE_MAX_ATTEMPTS = max(1, int(os.environ.get("BRIDGE_MAX_ATTEMPTS", "5")))
+BRIDGE_BACKOFF_S = max(0.5, float(os.environ.get("BRIDGE_BACKOFF_S", "2")))
+
+
+class BridgeTransientError(RuntimeError):
+    pass
+
 
 def bridge(action, **payload):
     body = {"token": BRIDGE_TOKEN, "action": action, **payload}
-    r = requests.post(BRIDGE_URL, json=body, timeout=180)
-    r.raise_for_status()
-    data = r.json()
-    if not data.get("ok"):
-        raise RuntimeError(data.get("error") or f"Bridge error in {action}")
-    return data
+    last_error = None
+
+    for attempt in range(1, BRIDGE_MAX_ATTEMPTS + 1):
+        try:
+            r = requests.post(BRIDGE_URL, json=body, timeout=(20, 90))
+
+            if r.status_code == 429 or 500 <= r.status_code < 600:
+                raise BridgeTransientError(
+                    f"Bridge transient HTTP {r.status_code} in {action}"
+                )
+
+            r.raise_for_status()
+
+            try:
+                data = r.json()
+            except ValueError as exc:
+                content_type = r.headers.get("content-type", "unknown")
+                raise BridgeTransientError(
+                    f"Bridge returned non-JSON response in {action} "
+                    f"(HTTP {r.status_code}, content-type={content_type})"
+                ) from exc
+
+            if not isinstance(data, dict):
+                raise BridgeTransientError(
+                    f"Bridge returned unexpected JSON type in {action}"
+                )
+
+            if not data.get("ok"):
+                raise RuntimeError(data.get("error") or f"Bridge error in {action}")
+
+            return data
+
+        except (requests.Timeout, requests.ConnectionError, BridgeTransientError) as exc:
+            last_error = exc
+            if attempt >= BRIDGE_MAX_ATTEMPTS:
+                break
+
+            delay = BRIDGE_BACKOFF_S * (2 ** (attempt - 1))
+            print(
+                f"Bridge transient failure in {action} "
+                f"(attempt {attempt}/{BRIDGE_MAX_ATTEMPTS}); "
+                f"retrying in {delay:.1f}s: {exc}",
+                flush=True,
+            )
+            time.sleep(delay)
+
+    raise RuntimeError(
+        f"Bridge unavailable after {BRIDGE_MAX_ATTEMPTS} attempts in {action}: "
+        f"{last_error}"
+    )
 
 def tokens(text):
     return re.findall(r"[A-Za-zÀ-ÿ0-9]+(?:[-’'][A-Za-zÀ-ÿ0-9]+)*", text or "")

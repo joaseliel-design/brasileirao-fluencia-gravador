@@ -29,15 +29,46 @@ jobs:
           set -euo pipefail
           test -n "$BRIDGE_URL"
           test -n "$BRIDGE_TOKEN"
+
           payload=$(jq -nc --arg token "$BRIDGE_TOKEN" '{action:"public_ranking",token:$token}')
-          curl -fsSL --retry 3 --retry-delay 2 \
-            -H 'Content-Type: application/json' \
-            -d "$payload" \
-            "$BRIDGE_URL" > /tmp/tv-data.json
-          jq -c '{ok,somente_leitura,error,categorias_tipo:(.categorias|type)}' /tmp/tv-data.json
-          jq -e '.ok == true and .somente_leitura == true and (.categorias | type == "array")' /tmp/tv-data.json >/dev/null
-          mkdir -p tv
-          jq '.' /tmp/tv-data.json > tv/data.json
+          success=0
+
+          for attempt in 1 2 3 4; do
+            echo "Bridge attempt $attempt/4..."
+
+            if curl --fail-with-body --silent --show-error --location \
+              --connect-timeout 15 --max-time 45 \
+              -H 'Content-Type: application/json' \
+              -d "$payload" \
+              "$BRIDGE_URL" > /tmp/tv-bridge-response.txt; then
+
+              if jq -e '
+                type == "object"
+                and .ok == true
+                and .somente_leitura == true
+                and (.categorias | type == "array")
+              ' /tmp/tv-bridge-response.txt >/dev/null 2>&1; then
+                mkdir -p tv
+                jq '.' /tmp/tv-bridge-response.txt > tv/data.json
+                jq -c '{ok,somente_leitura,categorias_tipo:(.categorias|type)}' tv/data.json
+                success=1
+                break
+              fi
+
+              echo "Bridge returned an invalid or unexpected response; retrying."
+            else
+              echo "Bridge request failed; retrying."
+            fi
+
+            if [ "$attempt" -lt 4 ]; then
+              sleep $((2 ** attempt))
+            fi
+          done
+
+          if [ "$success" -ne 1 ]; then
+            echo "Bridge unavailable after 4 validated attempts."
+            exit 1
+          fi
 
       - name: Publicar apenas se mudou
         shell: bash

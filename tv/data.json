@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-15T19:50:44.827Z",
+  "atualizado_em": "2026-09-15T20:01:06.426Z",
   "categorias": [
     {
       "categoria": 1,
@@ -189,6 +189,14 @@
         },
         {
           "posicao": 3,
+          "nome": "DORIAN MAGAIVER OLIVEIRA DE LIMA",
+          "turma": "41",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": true
+        },
+        {
+          "posicao": 4,
           "nome": "ESTELLA MOURA ANTONIO",
           "turma": "51",
           "leituraAtual": "L1",
@@ -196,7 +204,7 @@
           "destaque": true
         },
         {
-          "posicao": 4,
+          "posicao": 5,
           "nome": "BENJAMIN ZUANAZZI DE LIMA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -204,7 +212,7 @@
           "destaque": true
         },
         {
-          "posicao": 5,
+          "posicao": 6,
           "nome": "EDUARDA CHAGAS MEDINA",
           "turma": "51",
           "leituraAtual": "L1",
@@ -212,16 +220,8 @@
           "destaque": true
         },
         {
-          "posicao": 6,
-          "nome": "BERNARDO RIBEIRO FRAGA",
-          "turma": "51",
-          "leituraAtual": "L1",
-          "variacao": 0,
-          "destaque": true
-        },
-        {
           "posicao": 7,
-          "nome": "ALICE FLORES DA SILVA",
+          "nome": "EMANUELLE PRATES GUIMARÃES",
           "turma": "41",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -229,7 +229,7 @@
         },
         {
           "posicao": 8,
-          "nome": "KEMILLI LEMOS DA SILVA",
+          "nome": "BERNARDO RIBEIRO FRAGA",
           "turma": "51",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -237,6 +237,22 @@
         },
         {
           "posicao": 9,
+          "nome": "ALICE FLORES DA SILVA",
+          "turma": "41",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 10,
+          "nome": "KEMILLI LEMOS DA SILVA",
+          "turma": "51",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 11,
           "nome": "MIGUEL BARCELOS SILVA",
           "turma": "51",
           "leituraAtual": "L1",
@@ -244,7 +260,7 @@
           "destaque": false
         },
         {
-          "posicao": 10,
+          "posicao": 12,
           "nome": "BÁRBARA DOS SANTOS CLITO DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -252,7 +268,7 @@
           "destaque": false
         },
         {
-          "posicao": 11,
+          "posicao": 13,
           "nome": "ANA LUISA SANTOS DE FRAGA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -260,7 +276,7 @@
           "destaque": false
         },
         {
-          "posicao": 12,
+          "posicao": 14,
           "nome": "JOÃO PEDRO PEREIRA DE AVILA",
           "turma": "61",
           "leituraAtual": "L1",
@@ -268,7 +284,7 @@
           "destaque": false
         },
         {
-          "posicao": 13,
+          "posicao": 15,
           "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
           "turma": "41",
           "leituraAtual": "L1",
@@ -276,7 +292,7 @@
           "destaque": false
         },
         {
-          "posicao": 14,
+          "posicao": 16,
           "nome": "MURILO NUNES MAIA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -284,7 +300,7 @@
           "destaque": false
         },
         {
-          "posicao": 15,
+          "posicao": 17,
           "nome": "ARTHUR MARTIN GAMA",
           "turma": "61",
           "leituraAtual": "L1",
@@ -292,7 +308,7 @@
           "destaque": false
         },
         {
-          "posicao": 16,
+          "posicao": 18,
           "nome": "GUILHERME TRINDADE SOARES",
           "turma": "41",
           "leituraAtual": "L1",
@@ -300,7 +316,7 @@
           "destaque": false
         },
         {
-          "posicao": 17,
+          "posicao": 19,
           "nome": "SOPHIA MARTIN GAMA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -308,25 +324,9 @@
           "destaque": false
         },
         {
-          "posicao": 18,
+          "posicao": 20,
           "nome": "ISABELLA EBERTZ KOVASKI",
           "turma": "61",
-          "leituraAtual": "L1",
-          "variacao": 0,
-          "destaque": false
-        },
-        {
-          "posicao": 19,
-          "nome": "LARISSA DA LUZ SILVA",
-          "turma": "51",
-          "leituraAtual": "L1",
-          "variacao": 0,
-          "destaque": false
-        },
-        {
-          "posicao": 20,
-          "nome": "EDUARDA OLIVEIRA DE OLIVEIRA",
-          "turma": "51",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": false

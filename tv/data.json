@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-15T18:08:17.216Z",
+  "atualizado_em": "2026-09-15T18:25:49.830Z",
   "categorias": [
     {
       "categoria": 1,
@@ -83,7 +83,7 @@
           "nome": "MARIA HELENA CANUTO SANTOS",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -91,7 +91,7 @@
           "nome": "CAROLINA SANTOS GONÇALVES",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -99,7 +99,7 @@
           "nome": "LAUREN SILVA DA SILVA",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -107,7 +107,7 @@
           "nome": "RICARDO GARCIA PIETSCH",
           "turma": "21",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -115,7 +115,7 @@
           "nome": "JULIA OLIVEIRA PASSOS",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -123,7 +123,7 @@
           "nome": "SOPHIA EMANUELY FERREIRA PINHEIRO",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -131,11 +131,19 @@
           "nome": "HENRIQUE GELLER CORRÊA",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 17,
+          "nome": "ANA CLARA SANTOS PATZOLD",
+          "turma": "21",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 18,
           "nome": "MATHEUS ENRIQUE DOS SANTOS DA SILVA",
           "turma": "21",
           "leituraAtual": "L1",
@@ -143,7 +151,7 @@
           "destaque": false
         },
         {
-          "posicao": 18,
+          "posicao": 19,
           "nome": "ALEXSANDER LOPES DE OLIVEIRA",
           "turma": "31",
           "leituraAtual": "L1",
@@ -151,17 +159,9 @@
           "destaque": false
         },
         {
-          "posicao": 19,
+          "posicao": 20,
           "nome": "MIGUEL JOSEFINO DE MATOS",
           "turma": "21",
-          "leituraAtual": "L1",
-          "variacao": -1,
-          "destaque": false
-        },
-        {
-          "posicao": 20,
-          "nome": "ANTÔNIA ROSSET DOS SANTOS LEIRIA",
-          "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false

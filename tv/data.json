@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-15T12:09:02.571Z",
+  "atualizado_em": "2026-09-15T12:30:46.263Z",
   "categorias": [
     {
       "categoria": 1,
@@ -80,7 +80,7 @@
         },
         {
           "posicao": 10,
-          "nome": "SOPHIA EMANUELY FERREIRA PINHEIRO",
+          "nome": "JULIA OLIVEIRA PASSOS",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -88,63 +88,63 @@
         },
         {
           "posicao": 11,
-          "nome": "HENRIQUE GELLER CORRÊA",
+          "nome": "SOPHIA EMANUELY FERREIRA PINHEIRO",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 12,
-          "nome": "MATHEUS ENRIQUE DOS SANTOS DA SILVA",
-          "turma": "21",
+          "nome": "HENRIQUE GELLER CORRÊA",
+          "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 13,
-          "nome": "ALEXSANDER LOPES DE OLIVEIRA",
-          "turma": "31",
+          "nome": "MATHEUS ENRIQUE DOS SANTOS DA SILVA",
+          "turma": "21",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 14,
-          "nome": "MIGUEL JOSEFINO DE MATOS",
-          "turma": "21",
+          "nome": "ALEXSANDER LOPES DE OLIVEIRA",
+          "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 15,
-          "nome": "ANTÔNIA ROSSET DOS SANTOS LEIRIA",
-          "turma": "31",
+          "nome": "MIGUEL JOSEFINO DE MATOS",
+          "turma": "21",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 16,
-          "nome": "VALENTINA PRATES GOULART",
-          "turma": "21",
+          "nome": "ANTÔNIA ROSSET DOS SANTOS LEIRIA",
+          "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 17,
-          "nome": "ISAAC PINHEIRO DE LIMA",
-          "turma": "31",
+          "nome": "VALENTINA PRATES GOULART",
+          "turma": "21",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 18,
-          "nome": "IRIS VITIELLI DOS SANTOS DE MATTOS",
+          "nome": "ISAAC PINHEIRO DE LIMA",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,
@@ -152,7 +152,7 @@
         },
         {
           "posicao": 19,
-          "nome": "YASMIN VIVIANE FONSECA DE SOUZA",
+          "nome": "IRIS VITIELLI DOS SANTOS DE MATTOS",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,
@@ -160,8 +160,8 @@
         },
         {
           "posicao": 20,
-          "nome": "DIOVANNA ANDRADE SANTOS",
-          "turma": "21",
+          "nome": "YASMIN VIVIANE FONSECA DE SOUZA",
+          "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false

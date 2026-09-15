@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-15T13:50:47.363Z",
+  "atualizado_em": "2026-09-15T14:00:51.844Z",
   "categorias": [
     {
       "categoria": 1,
@@ -240,7 +240,7 @@
           "nome": "ANA LUISA SANTOS DE FRAGA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -248,7 +248,7 @@
           "nome": "JOÃO PEDRO PEREIRA DE AVILA",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -256,7 +256,7 @@
           "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -264,7 +264,7 @@
           "nome": "ARTHUR MARTIN GAMA",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -272,7 +272,7 @@
           "nome": "GUILHERME TRINDADE SOARES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -280,7 +280,7 @@
           "nome": "ISABELLA EBERTZ KOVASKI",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -288,7 +288,7 @@
           "nome": "LARISSA DA LUZ SILVA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -296,7 +296,7 @@
           "nome": "EDUARDA OLIVEIRA DE OLIVEIRA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -304,20 +304,20 @@
           "nome": "ALANA IRIBARREM DE VARGAS",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 18,
-          "nome": "ANA LAURA RAUPP SOUZA",
+          "nome": "MONIQUE DOS SANTOS FISCHER",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 19,
-          "nome": "ANTONIA STENGER FRAGA",
+          "nome": "MYSAEL SCHULZ DE FRAGA SILVA",
           "turma": "51",
           "leituraAtual": "L1",
           "variacao": -1,
@@ -325,7 +325,7 @@
         },
         {
           "posicao": 20,
-          "nome": "GUSTAVO TRINDADE SOARES",
+          "nome": "ANA LAURA RAUPP SOUZA",
           "turma": "51",
           "leituraAtual": "L1",
           "variacao": -1,

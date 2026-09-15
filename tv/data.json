@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-15T11:53:50.236Z",
+  "atualizado_em": "2026-09-15T12:09:02.571Z",
   "categorias": [
     {
       "categoria": 1,
@@ -35,7 +35,7 @@
           "nome": "CAIO BOHMGAHREN VARGAS",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": true
         },
         {
@@ -43,7 +43,7 @@
           "nome": "LUNA VICTÓRIA GRANVILLE DE MATOS",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 1,
+          "variacao": 0,
           "destaque": true
         },
         {
@@ -88,6 +88,14 @@
         },
         {
           "posicao": 11,
+          "nome": "HENRIQUE GELLER CORRÊA",
+          "turma": "31",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 12,
           "nome": "MATHEUS ENRIQUE DOS SANTOS DA SILVA",
           "turma": "21",
           "leituraAtual": "L1",
@@ -95,7 +103,7 @@
           "destaque": false
         },
         {
-          "posicao": 12,
+          "posicao": 13,
           "nome": "ALEXSANDER LOPES DE OLIVEIRA",
           "turma": "31",
           "leituraAtual": "L1",
@@ -103,7 +111,7 @@
           "destaque": false
         },
         {
-          "posicao": 13,
+          "posicao": 14,
           "nome": "MIGUEL JOSEFINO DE MATOS",
           "turma": "21",
           "leituraAtual": "L1",
@@ -111,16 +119,8 @@
           "destaque": false
         },
         {
-          "posicao": 14,
-          "nome": "VALENTINA PRATES GOULART",
-          "turma": "21",
-          "leituraAtual": "L1",
-          "variacao": 0,
-          "destaque": false
-        },
-        {
           "posicao": 15,
-          "nome": "YASMIN VIVIANE FONSECA DE SOUZA",
+          "nome": "ANTÔNIA ROSSET DOS SANTOS LEIRIA",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -128,7 +128,7 @@
         },
         {
           "posicao": 16,
-          "nome": "DIOVANNA ANDRADE SANTOS",
+          "nome": "VALENTINA PRATES GOULART",
           "turma": "21",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -136,7 +136,7 @@
         },
         {
           "posicao": 17,
-          "nome": "LUIZ GUSTAVO TOLEDO URBANSKI",
+          "nome": "ISAAC PINHEIRO DE LIMA",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -144,10 +144,26 @@
         },
         {
           "posicao": 18,
-          "nome": "JAMILY MANUELA FONSECA DE SOUZA",
+          "nome": "IRIS VITIELLI DOS SANTOS DE MATTOS",
+          "turma": "31",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 19,
+          "nome": "YASMIN VIVIANE FONSECA DE SOUZA",
+          "turma": "31",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 20,
+          "nome": "DIOVANNA ANDRADE SANTOS",
           "turma": "21",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         }
       ]

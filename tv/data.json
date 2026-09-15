@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-15T19:24:44.581Z",
+  "atualizado_em": "2026-09-15T19:38:53.197Z",
   "categorias": [
     {
       "categoria": 1,
@@ -197,138 +197,138 @@
         },
         {
           "posicao": 4,
-          "nome": "EDUARDA CHAGAS MEDINA",
-          "turma": "51",
+          "nome": "BENJAMIN ZUANAZZI DE LIMA",
+          "turma": "41",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": true
         },
         {
           "posicao": 5,
-          "nome": "BERNARDO RIBEIRO FRAGA",
+          "nome": "EDUARDA CHAGAS MEDINA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": true
         },
         {
           "posicao": 6,
-          "nome": "ALICE FLORES DA SILVA",
-          "turma": "41",
+          "nome": "BERNARDO RIBEIRO FRAGA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": true
         },
         {
           "posicao": 7,
-          "nome": "KEMILLI LEMOS DA SILVA",
-          "turma": "51",
+          "nome": "ALICE FLORES DA SILVA",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 8,
-          "nome": "MIGUEL BARCELOS SILVA",
+          "nome": "KEMILLI LEMOS DA SILVA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 9,
-          "nome": "ANA LUISA SANTOS DE FRAGA",
-          "turma": "41",
+          "nome": "MIGUEL BARCELOS SILVA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 10,
-          "nome": "JOÃO PEDRO PEREIRA DE AVILA",
-          "turma": "61",
+          "nome": "BÁRBARA DOS SANTOS CLITO DA SILVA",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 11,
-          "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
+          "nome": "ANA LUISA SANTOS DE FRAGA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 12,
-          "nome": "ARTHUR MARTIN GAMA",
+          "nome": "JOÃO PEDRO PEREIRA DE AVILA",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 13,
-          "nome": "GUILHERME TRINDADE SOARES",
+          "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 14,
-          "nome": "ISABELLA EBERTZ KOVASKI",
+          "nome": "ARTHUR MARTIN GAMA",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 15,
-          "nome": "LARISSA DA LUZ SILVA",
-          "turma": "51",
+          "nome": "GUILHERME TRINDADE SOARES",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 16,
-          "nome": "EDUARDA OLIVEIRA DE OLIVEIRA",
-          "turma": "51",
+          "nome": "SOPHIA MARTIN GAMA",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 17,
-          "nome": "ALANA IRIBARREM DE VARGAS",
-          "turma": "51",
+          "nome": "ISABELLA EBERTZ KOVASKI",
+          "turma": "61",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 18,
-          "nome": "MONIQUE DOS SANTOS FISCHER",
+          "nome": "LARISSA DA LUZ SILVA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 19,
-          "nome": "MYSAEL SCHULZ DE FRAGA SILVA",
+          "nome": "EDUARDA OLIVEIRA DE OLIVEIRA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 20,
-          "nome": "ANA LAURA RAUPP SOUZA",
+          "nome": "ALANA IRIBARREM DE VARGAS",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         }
       ]

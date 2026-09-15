@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-15T12:30:46.263Z",
+  "atualizado_em": "2026-09-15T12:50:04.429Z",
   "categorias": [
     {
       "categoria": 1,
@@ -16,7 +16,7 @@
         },
         {
           "posicao": 2,
-          "nome": "ISABELLA LIMA DE FRAGA",
+          "nome": "LAURA BEATRIZ BRINQUES VIEGAS",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -24,79 +24,79 @@
         },
         {
           "posicao": 3,
-          "nome": "MARIA GABRIELA ROLDÃO GONÇALVES",
+          "nome": "ISABELLA LIMA DE FRAGA",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": true
         },
         {
           "posicao": 4,
-          "nome": "CAIO BOHMGAHREN VARGAS",
+          "nome": "KAÍQUE KENDZESKI ANDRADE",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": true
         },
         {
           "posicao": 5,
-          "nome": "LUNA VICTÓRIA GRANVILLE DE MATOS",
+          "nome": "MARIA GABRIELA ROLDÃO GONÇALVES",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": true
         },
         {
           "posicao": 6,
-          "nome": "MARIA HELENA CANUTO SANTOS",
+          "nome": "CAIO BOHMGAHREN VARGAS",
           "turma": "31",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": true
         },
         {
           "posicao": 7,
-          "nome": "CAROLINA SANTOS GONÇALVES",
-          "turma": "31",
-          "leituraAtual": "L1",
-          "variacao": 0,
-          "destaque": false
-        },
-        {
-          "posicao": 8,
-          "nome": "LAUREN SILVA DA SILVA",
-          "turma": "31",
-          "leituraAtual": "L1",
-          "variacao": 0,
-          "destaque": false
-        },
-        {
-          "posicao": 9,
-          "nome": "RICARDO GARCIA PIETSCH",
-          "turma": "21",
-          "leituraAtual": "L1",
-          "variacao": 0,
-          "destaque": false
-        },
-        {
-          "posicao": 10,
-          "nome": "JULIA OLIVEIRA PASSOS",
-          "turma": "31",
-          "leituraAtual": "L1",
-          "variacao": 0,
-          "destaque": false
-        },
-        {
-          "posicao": 11,
-          "nome": "SOPHIA EMANUELY FERREIRA PINHEIRO",
+          "nome": "LUNA VICTÓRIA GRANVILLE DE MATOS",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false
         },
         {
+          "posicao": 8,
+          "nome": "MARIA HELENA CANUTO SANTOS",
+          "turma": "31",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 9,
+          "nome": "CAROLINA SANTOS GONÇALVES",
+          "turma": "31",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 10,
+          "nome": "LAUREN SILVA DA SILVA",
+          "turma": "31",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 11,
+          "nome": "RICARDO GARCIA PIETSCH",
+          "turma": "21",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
           "posicao": 12,
-          "nome": "HENRIQUE GELLER CORRÊA",
+          "nome": "JULIA OLIVEIRA PASSOS",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,
@@ -104,15 +104,15 @@
         },
         {
           "posicao": 13,
-          "nome": "MATHEUS ENRIQUE DOS SANTOS DA SILVA",
-          "turma": "21",
+          "nome": "SOPHIA EMANUELY FERREIRA PINHEIRO",
+          "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 14,
-          "nome": "ALEXSANDER LOPES DE OLIVEIRA",
+          "nome": "HENRIQUE GELLER CORRÊA",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,
@@ -120,7 +120,7 @@
         },
         {
           "posicao": 15,
-          "nome": "MIGUEL JOSEFINO DE MATOS",
+          "nome": "MATHEUS ENRIQUE DOS SANTOS DA SILVA",
           "turma": "21",
           "leituraAtual": "L1",
           "variacao": -1,
@@ -128,7 +128,7 @@
         },
         {
           "posicao": 16,
-          "nome": "ANTÔNIA ROSSET DOS SANTOS LEIRIA",
+          "nome": "ALEXSANDER LOPES DE OLIVEIRA",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,
@@ -136,7 +136,7 @@
         },
         {
           "posicao": 17,
-          "nome": "VALENTINA PRATES GOULART",
+          "nome": "MIGUEL JOSEFINO DE MATOS",
           "turma": "21",
           "leituraAtual": "L1",
           "variacao": -1,
@@ -144,7 +144,7 @@
         },
         {
           "posicao": 18,
-          "nome": "ISAAC PINHEIRO DE LIMA",
+          "nome": "ANTÔNIA ROSSET DOS SANTOS LEIRIA",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,
@@ -152,15 +152,15 @@
         },
         {
           "posicao": 19,
-          "nome": "IRIS VITIELLI DOS SANTOS DE MATTOS",
-          "turma": "31",
+          "nome": "VALENTINA PRATES GOULART",
+          "turma": "21",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 20,
-          "nome": "YASMIN VIVIANE FONSECA DE SOUZA",
+          "nome": "ISAAC PINHEIRO DE LIMA",
           "turma": "31",
           "leituraAtual": "L1",
           "variacao": -1,

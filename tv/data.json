@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-15T13:01:21.191Z",
+  "atualizado_em": "2026-09-15T13:21:17.591Z",
   "categorias": [
     {
       "categoria": 1,
@@ -189,7 +189,7 @@
         },
         {
           "posicao": 3,
-          "nome": "BERNARDO RIBEIRO FRAGA",
+          "nome": "EDUARDA CHAGAS MEDINA",
           "turma": "51",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -197,6 +197,14 @@
         },
         {
           "posicao": 4,
+          "nome": "BERNARDO RIBEIRO FRAGA",
+          "turma": "51",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": true
+        },
+        {
+          "posicao": 5,
           "nome": "ALICE FLORES DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -204,7 +212,7 @@
           "destaque": true
         },
         {
-          "posicao": 5,
+          "posicao": 6,
           "nome": "ANA LUISA SANTOS DE FRAGA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -212,15 +220,15 @@
           "destaque": true
         },
         {
-          "posicao": 6,
+          "posicao": 7,
           "nome": "JOÃO PEDRO PEREIRA DE AVILA",
           "turma": "61",
           "leituraAtual": "L1",
           "variacao": 0,
-          "destaque": true
+          "destaque": false
         },
         {
-          "posicao": 7,
+          "posicao": 8,
           "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
           "turma": "41",
           "leituraAtual": "L1",
@@ -228,7 +236,7 @@
           "destaque": false
         },
         {
-          "posicao": 8,
+          "posicao": 9,
           "nome": "ARTHUR MARTIN GAMA",
           "turma": "61",
           "leituraAtual": "L1",
@@ -236,7 +244,7 @@
           "destaque": false
         },
         {
-          "posicao": 9,
+          "posicao": 10,
           "nome": "GUILHERME TRINDADE SOARES",
           "turma": "41",
           "leituraAtual": "L1",
@@ -244,7 +252,7 @@
           "destaque": false
         },
         {
-          "posicao": 10,
+          "posicao": 11,
           "nome": "ISABELLA EBERTZ KOVASKI",
           "turma": "61",
           "leituraAtual": "L1",
@@ -252,7 +260,7 @@
           "destaque": false
         },
         {
-          "posicao": 11,
+          "posicao": 12,
           "nome": "LARISSA DA LUZ SILVA",
           "turma": "51",
           "leituraAtual": "L1",
@@ -260,16 +268,8 @@
           "destaque": false
         },
         {
-          "posicao": 12,
-          "nome": "ALANA IRIBARREM DE VARGAS",
-          "turma": "51",
-          "leituraAtual": "L1",
-          "variacao": 0,
-          "destaque": false
-        },
-        {
           "posicao": 13,
-          "nome": "ANA LAURA RAUPP SOUZA",
+          "nome": "EDUARDA OLIVEIRA DE OLIVEIRA",
           "turma": "51",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -277,7 +277,7 @@
         },
         {
           "posicao": 14,
-          "nome": "ANTONIA STENGER FRAGA",
+          "nome": "ALANA IRIBARREM DE VARGAS",
           "turma": "51",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -285,50 +285,50 @@
         },
         {
           "posicao": 15,
-          "nome": "LIVIA SILVA CAMPOS",
-          "turma": "41",
+          "nome": "ANA LAURA RAUPP SOUZA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 16,
-          "nome": "MIGUEL MACHADO ARAÚJO",
-          "turma": "41",
+          "nome": "ANTONIA STENGER FRAGA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 17,
-          "nome": "RICHARD CORREA PEREIRA",
-          "turma": "61",
+          "nome": "LIVIA SILVA CAMPOS",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 18,
-          "nome": "IAGO ALMEIDA RODRIGUES",
+          "nome": "MIGUEL MACHADO ARAÚJO",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 19,
-          "nome": "SOFIA SANHUDO MALTA",
-          "turma": "51",
+          "nome": "RICHARD CORREA PEREIRA",
+          "turma": "61",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 20,
-          "nome": "THAWAN MIGUEL DA SILVA CAVALHEIRO",
+          "nome": "IAGO ALMEIDA RODRIGUES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         }
       ]

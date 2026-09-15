@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-15T13:36:05.603Z",
+  "atualizado_em": "2026-09-15T13:50:47.363Z",
   "categorias": [
     {
       "categoria": 1,
@@ -221,114 +221,114 @@
         },
         {
           "posicao": 7,
-          "nome": "ANA LUISA SANTOS DE FRAGA",
-          "turma": "41",
+          "nome": "KEMILLI LEMOS DA SILVA",
+          "turma": "51",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 8,
-          "nome": "JOÃO PEDRO PEREIRA DE AVILA",
-          "turma": "61",
+          "nome": "MIGUEL BARCELOS SILVA",
+          "turma": "51",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 9,
-          "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
+          "nome": "ANA LUISA SANTOS DE FRAGA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 10,
-          "nome": "ARTHUR MARTIN GAMA",
+          "nome": "JOÃO PEDRO PEREIRA DE AVILA",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 11,
-          "nome": "GUILHERME TRINDADE SOARES",
+          "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 12,
-          "nome": "ISABELLA EBERTZ KOVASKI",
+          "nome": "ARTHUR MARTIN GAMA",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 13,
-          "nome": "LARISSA DA LUZ SILVA",
-          "turma": "51",
+          "nome": "GUILHERME TRINDADE SOARES",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 14,
-          "nome": "EDUARDA OLIVEIRA DE OLIVEIRA",
-          "turma": "51",
+          "nome": "ISABELLA EBERTZ KOVASKI",
+          "turma": "61",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 15,
-          "nome": "ALANA IRIBARREM DE VARGAS",
+          "nome": "LARISSA DA LUZ SILVA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 16,
-          "nome": "ANA LAURA RAUPP SOUZA",
+          "nome": "EDUARDA OLIVEIRA DE OLIVEIRA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 17,
-          "nome": "ANTONIA STENGER FRAGA",
+          "nome": "ALANA IRIBARREM DE VARGAS",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 18,
-          "nome": "GUSTAVO TRINDADE SOARES",
+          "nome": "ANA LAURA RAUPP SOUZA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 19,
-          "nome": "LIVIA SILVA CAMPOS",
-          "turma": "41",
+          "nome": "ANTONIA STENGER FRAGA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 20,
-          "nome": "MIGUEL MACHADO ARAÚJO",
-          "turma": "41",
+          "nome": "GUSTAVO TRINDADE SOARES",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         }
       ]

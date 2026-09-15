@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-15T19:38:53.197Z",
+  "atualizado_em": "2026-09-15T19:50:44.827Z",
   "categorias": [
     {
       "categoria": 1,
@@ -208,7 +208,7 @@
           "nome": "EDUARDA CHAGAS MEDINA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": true
         },
         {
@@ -216,7 +216,7 @@
           "nome": "BERNARDO RIBEIRO FRAGA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": true
         },
         {
@@ -224,7 +224,7 @@
           "nome": "ALICE FLORES DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -232,7 +232,7 @@
           "nome": "KEMILLI LEMOS DA SILVA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -240,7 +240,7 @@
           "nome": "MIGUEL BARCELOS SILVA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -248,7 +248,7 @@
           "nome": "BÁRBARA DOS SANTOS CLITO DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -256,7 +256,7 @@
           "nome": "ANA LUISA SANTOS DE FRAGA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -264,7 +264,7 @@
           "nome": "JOÃO PEDRO PEREIRA DE AVILA",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -272,63 +272,63 @@
           "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 14,
-          "nome": "ARTHUR MARTIN GAMA",
-          "turma": "61",
+          "nome": "MURILO NUNES MAIA",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 15,
-          "nome": "GUILHERME TRINDADE SOARES",
-          "turma": "41",
+          "nome": "ARTHUR MARTIN GAMA",
+          "turma": "61",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 16,
-          "nome": "SOPHIA MARTIN GAMA",
+          "nome": "GUILHERME TRINDADE SOARES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 17,
-          "nome": "ISABELLA EBERTZ KOVASKI",
-          "turma": "61",
+          "nome": "SOPHIA MARTIN GAMA",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 18,
-          "nome": "LARISSA DA LUZ SILVA",
-          "turma": "51",
+          "nome": "ISABELLA EBERTZ KOVASKI",
+          "turma": "61",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 19,
-          "nome": "EDUARDA OLIVEIRA DE OLIVEIRA",
+          "nome": "LARISSA DA LUZ SILVA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 20,
-          "nome": "ALANA IRIBARREM DE VARGAS",
+          "nome": "EDUARDA OLIVEIRA DE OLIVEIRA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         }
       ]

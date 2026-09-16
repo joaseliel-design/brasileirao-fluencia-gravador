@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-16T18:29:36.679Z",
+  "atualizado_em": "2026-09-16T18:47:31.893Z",
   "categorias": [
     {
       "categoria": 1,
@@ -197,7 +197,7 @@
         },
         {
           "posicao": 4,
-          "nome": "ALYCE ANDRADE SANTOS",
+          "nome": "SAIMON MADRID NUNES",
           "turma": "61",
           "leituraAtual": "L1",
           "variacao": 0,
@@ -205,54 +205,70 @@
         },
         {
           "posicao": 5,
-          "nome": "DORIAN MAGAIVER OLIVEIRA DE LIMA",
-          "turma": "41",
+          "nome": "ALYCE ANDRADE SANTOS",
+          "turma": "61",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": true
         },
         {
           "posicao": 6,
-          "nome": "ESTELLA MOURA ANTONIO",
-          "turma": "51",
+          "nome": "DORIAN MAGAIVER OLIVEIRA DE LIMA",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": true
         },
         {
           "posicao": 7,
-          "nome": "BENJAMIN ZUANAZZI DE LIMA",
-          "turma": "41",
+          "nome": "ESTELLA MOURA ANTONIO",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 8,
-          "nome": "EDUARDA CHAGAS MEDINA",
-          "turma": "51",
+          "nome": "BENJAMIN ZUANAZZI DE LIMA",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 9,
-          "nome": "EMANUELLE PRATES GUIMARÃES",
-          "turma": "41",
+          "nome": "EDUARDA CHAGAS MEDINA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 10,
-          "nome": "PAULA FERREIRA DE CARVALHO",
-          "turma": "61",
+          "nome": "EMANUELLE PRATES GUIMARÃES",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 11,
+          "nome": "RAYANE DOS SANTOS MARTINS",
+          "turma": "61",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 12,
+          "nome": "PAULA FERREIRA DE CARVALHO",
+          "turma": "61",
+          "leituraAtual": "L1",
+          "variacao": -1,
+          "destaque": false
+        },
+        {
+          "posicao": 13,
           "nome": "BERNARDO RIBEIRO FRAGA",
           "turma": "51",
           "leituraAtual": "L1",
@@ -260,7 +276,7 @@
           "destaque": false
         },
         {
-          "posicao": 12,
+          "posicao": 14,
           "nome": "ALICE FLORES DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -268,7 +284,7 @@
           "destaque": false
         },
         {
-          "posicao": 13,
+          "posicao": 15,
           "nome": "KEMILLI LEMOS DA SILVA",
           "turma": "51",
           "leituraAtual": "L1",
@@ -276,7 +292,7 @@
           "destaque": false
         },
         {
-          "posicao": 14,
+          "posicao": 16,
           "nome": "MIGUEL BARCELOS SILVA",
           "turma": "51",
           "leituraAtual": "L1",
@@ -284,7 +300,7 @@
           "destaque": false
         },
         {
-          "posicao": 15,
+          "posicao": 17,
           "nome": "BÁRBARA DOS SANTOS CLITO DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -292,7 +308,7 @@
           "destaque": false
         },
         {
-          "posicao": 16,
+          "posicao": 18,
           "nome": "ANA LUISA SANTOS DE FRAGA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -300,7 +316,7 @@
           "destaque": false
         },
         {
-          "posicao": 17,
+          "posicao": 19,
           "nome": "JOÃO PEDRO PEREIRA DE AVILA",
           "turma": "61",
           "leituraAtual": "L1",
@@ -308,25 +324,9 @@
           "destaque": false
         },
         {
-          "posicao": 18,
+          "posicao": 20,
           "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
           "turma": "41",
-          "leituraAtual": "L1",
-          "variacao": -1,
-          "destaque": false
-        },
-        {
-          "posicao": 19,
-          "nome": "MURILO NUNES MAIA",
-          "turma": "41",
-          "leituraAtual": "L1",
-          "variacao": -1,
-          "destaque": false
-        },
-        {
-          "posicao": 20,
-          "nome": "ARTHUR MARTIN GAMA",
-          "turma": "61",
           "leituraAtual": "L1",
           "variacao": -1,
           "destaque": false

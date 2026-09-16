@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-16T18:47:31.893Z",
+  "atualizado_em": "2026-09-16T18:58:15.472Z",
   "categorias": [
     {
       "categoria": 1,
@@ -208,7 +208,7 @@
           "nome": "ALYCE ANDRADE SANTOS",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": true
         },
         {
@@ -216,7 +216,7 @@
           "nome": "DORIAN MAGAIVER OLIVEIRA DE LIMA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": true
         },
         {
@@ -224,7 +224,7 @@
           "nome": "ESTELLA MOURA ANTONIO",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -232,7 +232,7 @@
           "nome": "BENJAMIN ZUANAZZI DE LIMA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -240,7 +240,7 @@
           "nome": "EDUARDA CHAGAS MEDINA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -248,7 +248,7 @@
           "nome": "EMANUELLE PRATES GUIMARÃES",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -256,7 +256,7 @@
           "nome": "RAYANE DOS SANTOS MARTINS",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -264,7 +264,7 @@
           "nome": "PAULA FERREIRA DE CARVALHO",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -272,27 +272,43 @@
           "nome": "BERNARDO RIBEIRO FRAGA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 14,
-          "nome": "ALICE FLORES DA SILVA",
-          "turma": "41",
+          "nome": "VINYCIUS GABRYEL DE FRAGA SANTANA",
+          "turma": "61",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 15,
-          "nome": "KEMILLI LEMOS DA SILVA",
-          "turma": "51",
+          "nome": "ALICE FLORES DA SILVA",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 16,
+          "nome": "KEMILLI LEMOS DA SILVA",
+          "turma": "51",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 17,
+          "nome": "LAVÍNIA DA ROCHA STREVENSKI",
+          "turma": "61",
+          "leituraAtual": "L1",
+          "variacao": 0,
+          "destaque": false
+        },
+        {
+          "posicao": 18,
           "nome": "MIGUEL BARCELOS SILVA",
           "turma": "51",
           "leituraAtual": "L1",
@@ -300,7 +316,7 @@
           "destaque": false
         },
         {
-          "posicao": 17,
+          "posicao": 19,
           "nome": "BÁRBARA DOS SANTOS CLITO DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
@@ -308,24 +324,8 @@
           "destaque": false
         },
         {
-          "posicao": 18,
-          "nome": "ANA LUISA SANTOS DE FRAGA",
-          "turma": "41",
-          "leituraAtual": "L1",
-          "variacao": -1,
-          "destaque": false
-        },
-        {
-          "posicao": 19,
-          "nome": "JOÃO PEDRO PEREIRA DE AVILA",
-          "turma": "61",
-          "leituraAtual": "L1",
-          "variacao": -1,
-          "destaque": false
-        },
-        {
           "posicao": 20,
-          "nome": "IZADORA DE SOUZA BARBOSA DOMINGUES",
+          "nome": "ANA LUISA SANTOS DE FRAGA",
           "turma": "41",
           "leituraAtual": "L1",
           "variacao": -1,

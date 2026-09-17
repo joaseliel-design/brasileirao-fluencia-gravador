@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-17T11:44:16.616Z",
+  "atualizado_em": "2026-09-17T11:56:08.491Z",
   "categorias": [
     {
       "categoria": 1,
@@ -312,7 +312,7 @@
           "nome": "MIGUEL BARCELOS SILVA",
           "turma": "51",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -320,7 +320,7 @@
           "nome": "BÁRBARA DOS SANTOS CLITO DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         },
         {
@@ -328,7 +328,7 @@
           "nome": "ANA LUISA SANTOS DE FRAGA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": -1,
+          "variacao": 0,
           "destaque": false
         }
       ]

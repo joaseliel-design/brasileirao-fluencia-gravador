@@ -1,7 +1,7 @@
 {
   "ok": true,
   "somente_leitura": true,
-  "atualizado_em": "2026-09-30T19:35:16.146Z",
+  "atualizado_em": "2026-09-30T19:49:22.169Z",
   "categorias": [
     {
       "categoria": 1,
@@ -237,98 +237,98 @@
         },
         {
           "posicao": 9,
-          "nome": "EDUARDA CHAGAS MEDINA",
-          "turma": "51",
+          "nome": "LÍVIA MARTIN GAMA",
+          "turma": "61",
           "leituraAtual": "L1",
           "variacao": 0,
           "destaque": false
         },
         {
           "posicao": 10,
-          "nome": "EMANUELLE PRATES GUIMARÃES",
-          "turma": "41",
+          "nome": "EDUARDA CHAGAS MEDINA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 11,
-          "nome": "RAYANE DOS SANTOS MARTINS",
-          "turma": "61",
+          "nome": "EMANUELLE PRATES GUIMARÃES",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 12,
-          "nome": "PAULA FERREIRA DE CARVALHO",
+          "nome": "RAYANE DOS SANTOS MARTINS",
           "turma": "61",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 13,
-          "nome": "BERNARDO RIBEIRO FRAGA",
-          "turma": "51",
+          "nome": "PAULA FERREIRA DE CARVALHO",
+          "turma": "61",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 14,
-          "nome": "VINYCIUS GABRYEL DE FRAGA SANTANA",
-          "turma": "61",
+          "nome": "BERNARDO RIBEIRO FRAGA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 15,
-          "nome": "ALICE FLORES DA SILVA",
-          "turma": "41",
+          "nome": "VINYCIUS GABRYEL DE FRAGA SANTANA",
+          "turma": "61",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 16,
-          "nome": "KEMILLI LEMOS DA SILVA",
-          "turma": "51",
+          "nome": "ALICE FLORES DA SILVA",
+          "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 17,
-          "nome": "LAVÍNIA DA ROCHA STREVENSKI",
-          "turma": "61",
+          "nome": "KEMILLI LEMOS DA SILVA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 18,
-          "nome": "MIGUEL BARCELOS SILVA",
-          "turma": "51",
+          "nome": "LAVÍNIA DA ROCHA STREVENSKI",
+          "turma": "61",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 19,
-          "nome": "BÁRBARA DOS SANTOS CLITO DA SILVA",
-          "turma": "41",
+          "nome": "MIGUEL BARCELOS SILVA",
+          "turma": "51",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         },
         {
           "posicao": 20,
-          "nome": "ANA LUISA SANTOS DE FRAGA",
+          "nome": "BÁRBARA DOS SANTOS CLITO DA SILVA",
           "turma": "41",
           "leituraAtual": "L1",
-          "variacao": 0,
+          "variacao": -1,
           "destaque": false
         }
       ]

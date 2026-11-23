@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "projeto": "Brasileirão da Fluência CVS 2026",
+  "rodada": 1,
+  "leitura": 2,
+  "status": "PREPARADO_NAO_ATIVO",
+  "roteamento": "ID_Educar_Web -> L2_Alocacao_Alunos -> Texto_ID -> L2_Textos_Serie",
+  "series": {
+    "2": {"texto_id":"R1L2_A2","titulo":"O MISTÉRIO DAS PEGADAS","palavras_prefeitura":142,"palavras_analise":142},
+    "3": {"texto_id":"R1L2_A3","titulo":"O MISTÉRIO NA MOCHILA DE PEDRO","palavras_prefeitura":166,"palavras_analise":165,"observacao":"O material da Prefeitura conta 'segunda-feira' como duas palavras; o tokenizer oficial do worker trata a forma hifenizada como um único token."},
+    "4": {"texto_id":"R1L2_A4","titulo":"AMORAS","palavras_prefeitura":150,"palavras_analise":150},
+    "5": {"texto_id":"R1L2_A56","titulo":"O ENIGMA DA TORRE ABANDONADA","palavras_prefeitura":279,"palavras_analise":279},
+    "6": {"texto_id":"R1L2_A56","titulo":"O ENIGMA DA TORRE ABANDONADA","palavras_prefeitura":279,"palavras_analise":279}
+  },
+  "privacidade": "Nenhum nome de aluno é armazenado neste manifesto público."
+}

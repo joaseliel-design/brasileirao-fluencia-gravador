@@ -567,11 +567,15 @@ def speed_from_alignment(ops, timed_words, duration, concluded, canonical_count)
         ppm = float(progressed)
     return round(ppm, 2), int(words60)
 
-def speed_index(ppm, turma, categoria):
+def speed_index(ppm, turma, categoria, ano=None):
     turma, categoria = int(turma), int(categoria)
-    if turma == 61:
+    if ano is None or str(ano).strip() == "":
+        ano = turma // 10 if turma >= 10 else turma
+    ano = int(ano)
+
+    if ano == 6:
         low, high = 130, 140
-    elif categoria == 1:
+    elif ano in (2, 3):
         low, high = 80, 90
     else:
         low, high = 110, 130
@@ -746,7 +750,7 @@ def process_job(model, job):
             concluded,
             len(raw_canon),
         )
-        v_idx = speed_index(ppm, job["turma"], job["categoria"])
+        v_idx = speed_index(ppm, job["turma"], job["categoria"], job.get("ano"))
 
         # Para leitura incompleta, ritmo e prosódia consideram somente o trecho
         # efetivamente tentado. O trecho abandonado penaliza a precisão, não

@@ -1,0 +1,78 @@
+name: Análise de Fluência — LIVE
+
+on:
+  push:
+    paths:
+      - ".github/workflows/analise-live.yml"
+      - "analysis/live_worker.py"
+  workflow_dispatch:
+    inputs:
+      live_minutes:
+        description: "Janela LIVE em minutos"
+        required: false
+        default: "240"
+  schedule:
+    - cron: "0 11 * * 1-5"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fluencia-analysis
+  cancel-in-progress: false
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+
+    env:
+      BRIDGE_URL: ${{ secrets.CVS_BRIDGE_URL }}
+      BRIDGE_TOKEN: ${{ secrets.CVS_BRIDGE_TOKEN }}
+      FW_MODEL: medium
+      LIVE_MINUTES: ${{ inputs.live_minutes || '240' }}
+      POLL_SECONDS: "15"
+      LIVE_BATCH_SIZE: "4"
+      BRIDGE_MAX_ATTEMPTS: "5"
+      BRIDGE_BACKOFF_S: "2"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: analysis/requirements.txt
+
+      - name: Cache Whisper model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: fluencia-faster-whisper-medium-v1
+
+      - name: Ensure ffmpeg
+        shell: bash
+        timeout-minutes: 5
+        run: |
+          if command -v ffmpeg >/dev/null 2>&1; then
+            ffmpeg -version | head -n 1
+          else
+            timeout 180s sudo apt-get update -qq
+            timeout 180s sudo apt-get install -y ffmpeg
+            ffmpeg -version | head -n 1
+          fi
+
+      - name: Install dependencies
+        run: pip install -r analysis/requirements.txt
+
+      - name: Validate protected configuration
+        shell: bash
+        run: |
+          test -n "$BRIDGE_URL" || (echo "Missing CVS_BRIDGE_URL secret" && exit 1)
+          test -n "$BRIDGE_TOKEN" || (echo "Missing CVS_BRIDGE_TOKEN secret" && exit 1)
+
+      - name: LIVE processing
+        run: python analysis/live_worker.py
